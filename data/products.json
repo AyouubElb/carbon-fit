@@ -1,0 +1,166 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Porsche 911 RS T-Shirt pink",
+      "brand": "Porsche",
+      "originalPrice": 289.0,
+      "salePrice": 219.0,
+      "price": 219,
+      "onSale": true,
+      "images": [
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/product1-nJU4ZjI41PJ6W07CtFdfCglCdJRUIN.webp",
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/product1-nJU4ZjI41PJ6W07CtFdfCglCdJRUIN.webp",
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/product1-nJU4ZjI41PJ6W07CtFdfCglCdJRUIN.webp"
+      ],
+      "thumbnails": [
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/product1-nJU4ZjI41PJ6W07CtFdfCglCdJRUIN.webp",
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/product1-nJU4ZjI41PJ6W07CtFdfCglCdJRUIN.webp",
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/product1-nJU4ZjI41PJ6W07CtFdfCglCdJRUIN.webp"
+      ],
+      "description": "Porsche style meets streetwear.",
+      "features": [
+        "Premium cotton",
+        "Clean, performance-inspired design",
+        "Free shipping in Morocco",
+        "Delivered in 24h"
+      ],
+      "sizes": ["XS", "S", "M", "L", "XL", "2XL", "3XL"]
+    },
+    {
+      "id": 2,
+      "title": "We Don't Pray for Love We Just Pray for Cars T-Shirt",
+      "brand": "RACER WEAR",
+      "originalPrice": 269.0,
+      "salePrice": 219.0,
+      "price": 219,
+      "onSale": true,
+      "images": [
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/product2-YtKr3kgOX87WJV792knXFu9xNx5F25.webp",
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/product2-YtKr3kgOX87WJV792knXFu9xNx5F25.webp",
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/product2-YtKr3kgOX87WJV792knXFu9xNx5F25.webp"
+      ],
+      "thumbnails": [
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/product2-YtKr3kgOX87WJV792knXFu9xNx5F25.webp",
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/product2-YtKr3kgOX87WJV792knXFu9xNx5F25.webp",
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/product2-YtKr3kgOX87WJV792knXFu9xNx5F25.webp"
+      ],
+      "description": "Express your passion for cars with this bold statement tee.",
+      "features": [
+        "Premium cotton",
+        "Bold statement design",
+        "Free shipping in Morocco",
+        "Delivered in 24h"
+      ],
+      "sizes": ["XS", "S", "M", "L", "XL", "2XL", "3XL"]
+    },
+    {
+      "id": 3,
+      "title": "Volkswagen Heritage T-Shirt",
+      "brand": "Volkswagen",
+      "originalPrice": 269.0,
+      "salePrice": 219.0,
+      "price": 219,
+      "onSale": true,
+      "images": [
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/product3-aUY6BQu3Oo702KYkjBRXW1AtolelO6.webp",
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/product3-aUY6BQu3Oo702KYkjBRXW1AtolelO6.webp",
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/product3-aUY6BQu3Oo702KYkjBRXW1AtolelO6.webp"
+      ],
+      "thumbnails": [
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/product3-aUY6BQu3Oo702KYkjBRXW1AtolelO6.webp",
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/product3-aUY6BQu3Oo702KYkjBRXW1AtolelO6.webp",
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/product3-aUY6BQu3Oo702KYkjBRXW1AtolelO6.webp"
+      ],
+      "description": "Classic Volkswagen styling for the modern enthusiast.",
+      "features": [
+        "Premium cotton",
+        "Classic VW design",
+        "Free shipping in Morocco",
+        "Delivered in 24h"
+      ],
+      "sizes": ["XS", "S", "M", "L", "XL", "2XL", "3XL"]
+    },
+    {
+      "id": 4,
+      "title": "Audi In a world full of automatics be a manual T-SHIRT",
+      "brand": "Audi",
+      "originalPrice": 269.0,
+      "salePrice": 219.0,
+      "price": 219,
+      "onSale": true,
+      "images": [
+        "/placeholder.svg?height=600&width=600",
+        "/placeholder.svg?height=600&width=600",
+        "/placeholder.svg?height=600&width=600"
+      ],
+      "thumbnails": [
+        "/placeholder.svg?height=300&width=300",
+        "/placeholder.svg?height=300&width=300",
+        "/placeholder.svg?height=300&width=300"
+      ],
+      "description": "For those who appreciate the art of manual transmission.",
+      "features": [
+        "Premium cotton",
+        "Manual transmission tribute",
+        "Free shipping in Morocco",
+        "Delivered in 24h"
+      ],
+      "sizes": ["XS", "S", "M", "L", "XL", "2XL", "3XL"]
+    },
+    {
+      "id": 5,
+      "title": "BMW M4 Street Legend T-Shirt",
+      "brand": "BMW",
+      "originalPrice": 269.0,
+      "salePrice": 219.0,
+      "price": 219,
+      "onSale": true,
+      "images": [
+        "/placeholder.svg?height=600&width=600",
+        "/placeholder.svg?height=600&width=600",
+        "/placeholder.svg?height=600&width=600"
+      ],
+      "thumbnails": [
+        "/placeholder.svg?height=300&width=300",
+        "/placeholder.svg?height=300&width=300",
+        "/placeholder.svg?height=300&width=300"
+      ],
+      "description": "Show your BMW M4 enthusiasm with this street legend design.",
+      "features": [
+        "Premium cotton",
+        "BMW M4 inspired design",
+        "Free shipping in Morocco",
+        "Delivered in 24h"
+      ],
+      "sizes": ["XS", "S", "M", "L", "XL", "2XL", "3XL"]
+    },
+    {
+      "id": 6,
+      "title": "AUDI T-SHIRT PACK",
+      "brand": "Audi",
+      "originalPrice": 449.0,
+      "salePrice": 379.0,
+      "price": 379,
+      "onSale": true,
+      "images": [
+        "/placeholder.svg?height=600&width=600",
+        "/placeholder.svg?height=600&width=600",
+        "/placeholder.svg?height=600&width=600"
+      ],
+      "thumbnails": [
+        "/placeholder.svg?height=300&width=300",
+        "/placeholder.svg?height=300&width=300",
+        "/placeholder.svg?height=300&width=300"
+      ],
+      "description": "Complete Audi collection pack with multiple designs.",
+      "features": [
+        "Premium cotton",
+        "Multiple Audi designs",
+        "Free shipping in Morocco",
+        "Delivered in 24h"
+      ],
+      "sizes": ["XS", "S", "M", "L", "XL", "2XL", "3XL"]
+    }
+  ]
+}

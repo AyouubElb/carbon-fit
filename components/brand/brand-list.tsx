@@ -1,0 +1,38 @@
+"use client";
+import { Brand } from "@/lib/types";
+import React, { use } from "react";
+import { Card, CardContent } from "../ui/card";
+import { ArrowRight } from "lucide-react";
+import { SUPABASE_IMAGE_URL } from "@/lib/supabaseClient";
+
+const BrandList = ({ brands }: { brands: Promise<Brand[]> }) => {
+  const brandList = use(brands);
+  return (
+    <>
+      {brandList.map((brand) => (
+        <Card
+          key={brand.id}
+          className="relative group rounded-none gap-0 p-0 border-none bg-transparent"
+        >
+          <div className="w-full mb-2 aspect-[5/6] overflow-hidden">
+            <img
+              src={SUPABASE_IMAGE_URL + brand.image}
+              alt={`${brand.name} with t-shirt`}
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+            />
+          </div>
+          <CardContent className="p-2 md:p-4">
+            <div className="flex items-center gap-1 hover:gap-2 cursor-pointer w-fit">
+              <h2 className="font-heading text-lg md:text-2xl text-[#E8E8E8] font-semibold uppercase">
+                {brand.name}
+              </h2>
+              <ArrowRight className="text-[#E8E8E8BF] w-6 h-6 md:w-7 md:h-7" />
+            </div>
+          </CardContent>
+        </Card>
+      ))}
+    </>
+  );
+};
+
+export default BrandList;

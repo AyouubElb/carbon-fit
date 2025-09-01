@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Figtree, Geist, Geist_Mono, Oswald } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/layout/header";
+import Newsletter from "@/components/layout/newslatter";
+import { CartProvider } from "@/contexts/cart-context";
 
-const geistSans = Geist({
+/*const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
@@ -10,6 +13,16 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});*/
+
+const figtree = Figtree({
+  subsets: ["latin"],
+  variable: "--font-figtree-sans",
+});
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  variable: "--font-oswald-heading",
 });
 
 export const metadata: Metadata = {
@@ -24,10 +37,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${figtree.variable} ${oswald.variable} antialiased`}>
+        <CartProvider>
+          {/* Top Banner */}
+          <div className="bg-[#1A1A1C] text-center py-2.5 px-7.5 border-b-gray-700 border-b-[1px]">
+            <p className="font-heading text-base md:text-xl text-[#E8E8E8] font-medium tracking-widest">
+              FREE SHIPPING ON OVER $50 ORDERS
+            </p>
+          </div>
+          <Header />
+          {children}
+          <Newsletter />
+        </CartProvider>
       </body>
     </html>
   );
