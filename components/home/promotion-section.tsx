@@ -1,9 +1,66 @@
-import React from "react";
+"use client";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import React, { useRef } from "react";
 
 const PromotionSection = () => {
+  const promotionRef = useRef<HTMLElement>(null);
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: promotionRef.current,
+          start: "top 50%",
+          once: true,
+          markers: false,
+        },
+      });
+
+      // Title + subtitle
+      tl.fromTo(
+        ".title-letter",
+        {
+          opacity: 0,
+          filter: "blur(6px)",
+        },
+        {
+          opacity: 1,
+          filter: "blur(0px)",
+          duration: 0.06,
+          stagger: 0.03,
+          ease: "power1.inOut",
+        }
+      );
+
+      tl.from(" .promotion-content", {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power1.inOut",
+        stagger: 0.1,
+      });
+
+      //cards
+      tl.fromTo(
+        ".testimonial-card",
+        {
+          y: 40,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power1.inOut",
+          stagger: 0.4,
+        }
+      );
+    },
+    { scope: promotionRef }
+  );
   return (
-    <section className="px-4 py-7 md:p-[50px]">
-      <div className="grid md:grid-cols-2 items-center">
+    <section ref={promotionRef} className="px-4 py-7 md:p-[50px]">
+      <div className="promotion-content grid md:grid-cols-2 items-center">
         {/* Product box image */}
         <div className="w-full ">
           <img

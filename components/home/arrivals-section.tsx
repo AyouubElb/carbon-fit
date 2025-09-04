@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
 import ProductList from "../product/product-list";
 import { getProducts } from "@/lib/services/products";
-import { Product } from "@/lib/types";
 import ViewAllButton from "../ui/view-all-button";
 
 const ArrivalsSection = () => {

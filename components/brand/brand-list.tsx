@@ -4,6 +4,7 @@ import React, { use } from "react";
 import { Card, CardContent } from "../ui/card";
 import { ArrowRight } from "lucide-react";
 import { SUPABASE_IMAGE_URL } from "@/lib/supabaseClient";
+import Image from "next/image";
 
 const BrandList = ({ brands }: { brands: Promise<Brand[]> }) => {
   const brandList = use(brands);
@@ -14,11 +15,12 @@ const BrandList = ({ brands }: { brands: Promise<Brand[]> }) => {
           key={brand.id}
           className="relative group rounded-none gap-0 p-0 border-none bg-transparent"
         >
-          <div className="w-full mb-2 aspect-[5/6] overflow-hidden">
-            <img
+          <div className="relative w-full max-w-xl mb-2 aspect-[5/6] overflow-hidden">
+            <Image
               src={SUPABASE_IMAGE_URL + brand.image}
               alt={`${brand.name} with t-shirt`}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              fill
+              className="object-cover transition-transform duration-300 group-hover:scale-110"
             />
           </div>
           <CardContent className="p-2 md:p-4">

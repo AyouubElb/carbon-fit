@@ -1,7 +1,7 @@
 import { ChevronDown, X } from "lucide-react";
 import React from "react";
 
-const brands = ["Audi", "BMW", "Mercedes", "Porsche", "Ferrari", "Volkswagen"];
+const brands = ["audi", "bmw", "mercedes", "porsche", "ferrari", "volkswagen"];
 const priceRanges = [
   { label: "Under Dh 250", value: "0-250" },
   { label: "Dh 250 - Dh 350", value: "250-350" },
@@ -75,7 +75,7 @@ const FilterPanel = ({
                       onChange={() => handleBrandChange(brand)}
                       className="w-4 h-4 rounded-none border border-[#3a3a3c] bg-transparent checked:bg-[rgb(236,193,116)] checked:border-[rgb(236,193,116)] focus:ring-0 focus:ring-offset-0"
                     />
-                    <span className="text-[#E8E8E8BF] font-figtree text-sm">
+                    <span className="text-[#E8E8E8BF] font-figtree text-sm capitalize">
                       {brand}
                     </span>
                   </label>

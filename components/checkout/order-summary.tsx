@@ -8,6 +8,7 @@ import { SUPABASE_IMAGE_URL } from "@/lib/supabaseClient";
 
 const OrderSummary = () => {
   const { items, total } = useCart();
+  console.log("Cart items in OrderSummary:", items);
 
   return (
     <div className="space-y-6">

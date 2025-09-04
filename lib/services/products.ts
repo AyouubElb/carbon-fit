@@ -38,8 +38,6 @@ export const getProductById = async (id: string): Promise<Product | null> => {
     .eq("id", id)
     .single();
 
-  console.log("Data fetched for product ID", id, ":", data, "Error:", error);
-
   if (error) {
     console.error("Error fetching product:", error.message);
     return data;

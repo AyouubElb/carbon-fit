@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/header";
 import Newsletter from "@/components/layout/newslatter";
 import { CartProvider } from "@/contexts/cart-context";
+import { Toaster } from "sonner";
 
 /*const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -47,6 +48,8 @@ export default function RootLayout({
           </div>
           <Header />
           {children}
+          <Toaster />
+
           <Newsletter />
         </CartProvider>
       </body>
