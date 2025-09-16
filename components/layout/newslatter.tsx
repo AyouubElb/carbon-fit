@@ -1,4 +1,5 @@
 import { MoveRight } from "lucide-react";
+import Image from "next/image";
 import React from "react";
 
 const Newsletter = () => {
@@ -28,11 +29,14 @@ const Newsletter = () => {
 
         {/* Trust badges */}
         <div className="max-w-sm mx-auto mb-12">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/trusted_badge-5vvnKTAkLb8JY8sFih5WpnlkVfb01n.webp"
-            alt="Trust badges - Premium Quality, Money Back Guarantee, Cash on Delivery, Free Shipping"
-            className="mx-auto max-w-full h-auto"
-          />
+          <div className="relative w-full h-29">
+            <Image
+              src="/images/trusted-badge.webp"
+              alt="Trust badges - Premium Quality, Money Back Guarantee, Cash on Delivery, Free Shipping"
+              className="mx-auto"
+              fill
+            />
+          </div>
         </div>
 
         {/* Footer text */}

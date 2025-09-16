@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const reviews = [
@@ -47,11 +48,12 @@ const ReviewsSection = () => {
       <div className="grid md:grid-cols-3 gap-10 mb-8">
         {reviews.map((review) => (
           <div key={review.id} className="bg-[#2E2E30] space-y-4 px-8 py-6">
-            <div className="w-full aspect-[5/6] overflow-hidden">
-              <img
+            <div className="relative w-full aspect-[5/6] overflow-hidden">
+              <Image
                 src={review.image}
                 alt={`Customer review - ${review.name}`}
                 className="w-full h-full object-cover"
+                fill
               />
             </div>
             <div>

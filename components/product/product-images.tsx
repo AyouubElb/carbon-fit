@@ -1,6 +1,7 @@
 "use client";
 
 import { SUPABASE_IMAGE_URL } from "@/lib/supabaseClient";
+import Image from "next/image";
 import React, { useState } from "react";
 
 interface ProductImagesProps {
@@ -26,7 +27,7 @@ const ProductImages = ({
     >
       {/* Main Product Image */}
       <div className="bg-gray-100 rounded-none mb-4 aspect-square">
-        <img
+        <Image
           src={SUPABASE_IMAGE_URL + images[selectedImage] || "/placeholder.svg"}
           alt={title}
           className="w-full h-full object-cover rounded-none"
@@ -45,7 +46,7 @@ const ProductImages = ({
                 : "border-transparent"
             }`}
           >
-            <img
+            <Image
               src={SUPABASE_IMAGE_URL + image || "/placeholder.svg"}
               alt={`${title} view ${index + 1}`}
               className="w-full h-full object-cover rounded-none"

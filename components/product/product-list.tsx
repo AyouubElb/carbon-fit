@@ -4,6 +4,7 @@ import { Card, CardContent } from "../ui/card";
 import { Product } from "../../lib/types";
 import { useRouter } from "next/navigation";
 import { SUPABASE_IMAGE_URL } from "@/lib/supabaseClient";
+import Image from "next/image";
 
 interface ProductListProps {
   products: Product[] | Promise<Product[]>;
@@ -33,7 +34,7 @@ const ProductList = ({ products, variant }: ProductListProps) => {
             ${variant === "products" ? "aspect-[5/6]" : "aspect-square"}
           `}
           >
-            <img
+            <Image
               src={SUPABASE_IMAGE_URL + product.images[0]}
               alt={product.title}
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"

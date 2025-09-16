@@ -1,4 +1,5 @@
 import { Span } from "next/dist/trace";
+import Image from "next/image";
 import React from "react";
 
 const OurStorySection = () => {
@@ -6,11 +7,12 @@ const OurStorySection = () => {
     <section className="px-4 py-7 md:p-[50px]">
       <div className="grid md:grid-cols-2 items-center">
         {/* Image - left side */}
-        <div className="w-full h-full">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Our-story-image-wuKOGoVsRBcAEDzjBdI900YJOPyYNA.webp"
+        <div className="relative w-full h-full">
+          <Image
+            src="/images/our-story-image.webp"
             alt="Two founders standing between Porsche and BMW with Racer Wear neon sign"
             className="w-full h-full object-cover"
+            fill
           />
         </div>
         {/* Text content - right side */}

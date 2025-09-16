@@ -1,11 +1,14 @@
+import { MapPin, Phone, User } from "lucide-react";
+import Image from "next/image";
 import React from "react";
+import { Button } from "../ui/button";
 
 const OrderSummary = () => {
   return (
     <div className="bg-white rounded-lg p-6 space-y-4">
       <div className="flex items-center gap-4 py-3 border-y border-[#c7c7c7]">
         <div className="w-18 h-18 bg-gray-100 rounded-none flex-shrink-0">
-          <img
+          <Image
             src={product.images[0] || "/placeholder.svg"}
             alt={product.title}
             className="w-full h-full object-cover rounded-none"

@@ -21,7 +21,7 @@ const HeroSection = () => {
   return (
     <section
       ref={heroRef}
-      className="px-[50px] py-[100px] relative md:min-h-[600px] flex items-center justify-center bg-[url('/images/hero-banner.webp')] bg-cover bg-center animate-moveBg"
+      className="px-[50px] py-[100px] relative md:min-h-screen flex items-center justify-center bg-[url('/images/hero-banner.webp')] bg-cover bg-center animate-moveBg"
     >
       {/* Dark overlay  */}
       <div className="absolute inset-0 bg-black/25"></div>
