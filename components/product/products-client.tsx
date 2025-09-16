@@ -50,7 +50,14 @@ const ProductsClient = () => {
     return brandMatch && priceMatch;
   });
 
-  const sortedAndFilteredProducts = filteredProducts.sort((a, b) => {
+  // Helper to safely convert product.created_at to a timestamp (number)
+  const toTimestamp = (d?: string | Date | null): number => {
+    if (!d) return 0;
+    const t = new Date(d).getTime();
+    return Number.isNaN(t) ? 0 : t;
+  };
+
+  const sortedAndFilteredProducts = [...filteredProducts].sort((a, b) => {
     switch (sortBy) {
       case "Alphabetically, A-Z":
         return a.title.localeCompare(b.title);
@@ -61,13 +68,9 @@ const ProductsClient = () => {
       case "Price, high to low":
         return b.price - a.price;
       case "Date, old to new":
-        return (
-          new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
-        );
+        return toTimestamp(a.created_at) - toTimestamp(b.created_at);
       case "Date, new to old":
-        return (
-          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-        );
+        return toTimestamp(b.created_at) - toTimestamp(a.created_at);
 
       default:
         return 0;
