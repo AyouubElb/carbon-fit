@@ -26,11 +26,12 @@ const ProductImages = ({
       className={`${isSticky ? "md:sticky" : ""} md:h-fit`}
     >
       {/* Main Product Image */}
-      <div className="bg-gray-100 rounded-none mb-4 aspect-square">
+      <div className="relative w-full bg-gray-100 rounded-none mb-4 aspect-square">
         <Image
           src={SUPABASE_IMAGE_URL + images[selectedImage] || "/placeholder.svg"}
           alt={title}
-          className="w-full h-full object-cover rounded-none"
+          fill
+          className="object-cover rounded-none"
         />
       </div>
 
@@ -40,7 +41,7 @@ const ProductImages = ({
           <button
             key={index}
             onClick={() => setSelectedImage(index)}
-            className={`bg-gray-100 rounded-none aspect-square border-2 ${
+            className={`relative w-full bg-gray-100 rounded-none aspect-square border-2 ${
               selectedImage === index
                 ? "border-[rgb(236,193,116)]"
                 : "border-transparent"
@@ -49,7 +50,8 @@ const ProductImages = ({
             <Image
               src={SUPABASE_IMAGE_URL + image || "/placeholder.svg"}
               alt={`${title} view ${index + 1}`}
-              className="w-full h-full object-cover rounded-none"
+              fill
+              className="object-cover rounded-none"
             />
           </button>
         ))}

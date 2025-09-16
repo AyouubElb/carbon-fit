@@ -30,14 +30,15 @@ const ProductList = ({ products, variant }: ProductListProps) => {
           onClick={() => router.push(`/products/${product.id}`)}
         >
           <div
-            className={`w-full overflow-hidden
+            className={`relative w-full overflow-hidden
             ${variant === "products" ? "aspect-[5/6]" : "aspect-square"}
           `}
           >
             <Image
               src={SUPABASE_IMAGE_URL + product.images[0]}
               alt={product.title}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              fill
+              className="cover transition-transform duration-300 group-hover:scale-110"
             />
           </div>
           <CardContent className="p-3.5 md:py-6.5 md:px-6">

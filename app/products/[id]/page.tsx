@@ -2,8 +2,9 @@ import { Product } from "@/lib/types";
 import { getProductById } from "@/lib/services/products";
 import ProductDetailsClient from "@/components/product/ProductDetailsClient";
 
-const ProductPage = async ({ params }: { params: { id: string } }) => {
-  const product: Product | null = await getProductById(params.id);
+const ProductPage = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params;
+  const product: Product | null = await getProductById(id);
 
   console.log("Fetched product:", product);
 
