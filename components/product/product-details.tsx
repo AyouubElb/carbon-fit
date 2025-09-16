@@ -5,7 +5,6 @@ import { CheckCircle, Minus, Plus } from "lucide-react";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
-import OrderSummary from "./order-summary";
 import { useCart } from "@/contexts/cart-context";
 
 interface ProductDetailsProps {
@@ -118,7 +117,6 @@ const ProductDetails = ({ product, rightSideRef }: ProductDetailsProps) => {
       </div>
 
       {/* Order Summary */}
-      {/*<OrderSummary /> */}
 
       {/* Add to Cart Button */}
       <Button
