@@ -6,8 +6,6 @@ const ProductPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const product: Product | null = await getProductById(id);
 
-  console.log("Fetched product:", product);
-
   if (!product) {
     return (
       <div className="min-h-screen bg-[#1f1f21] flex items-center justify-center">

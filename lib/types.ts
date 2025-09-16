@@ -4,13 +4,13 @@ export interface Product {
   id: string;
   title: string;
   price: number;
-  originalPrice: number;
+  originalPrice?: number;
   onSale: boolean;
   brands: { name: string };
   images: string[];
   description: string;
   sizes: string[];
-  created_at: Date;
+  created_at?: string | Date;
 }
 
 export interface Brand {

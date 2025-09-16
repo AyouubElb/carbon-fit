@@ -22,8 +22,6 @@ interface CartSidebarProps {
 export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
   const { items, total, updateQuantity, removeItem } = useCart();
 
-  console.log("image:", items);
-
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
       <SheetContent className="w-full sm:max-w-lg gap-0">

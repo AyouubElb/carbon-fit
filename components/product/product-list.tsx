@@ -15,8 +15,6 @@ const ProductList = ({ products, variant }: ProductListProps) => {
   const router = useRouter();
   const productList = products instanceof Promise ? use(products) : products;
 
-  console.log("Products in ProductList:", productList);
-
   return (
     <div
       className={`grid md:grid-cols-4 md:gap-10 gap-5 
