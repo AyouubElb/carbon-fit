@@ -1,5 +1,5 @@
 import ProductsClient from "@/components/product/products-client";
-import React from "react";
+import React, { Suspense } from "react";
 
 const Collections = () => {
   return (
@@ -11,7 +11,15 @@ const Collections = () => {
         </h1>
       </div>
       {/* Products Client*/}
-      <ProductsClient />
+      <Suspense
+        fallback={
+          <div className="flex items-center justify-center h-64">
+            <p className="text-lg text-gray-500">Loading ...</p>
+          </div>
+        }
+      >
+        <ProductsClient />
+      </Suspense>
     </div>
   );
 };
