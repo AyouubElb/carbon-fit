@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Figtree, Geist, Geist_Mono, Oswald } from "next/font/google";
+import { Figtree, Oswald } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/header";
 import Newsletter from "@/components/layout/newslatter";
 import { CartProvider } from "@/contexts/cart-context";
 import { Toaster } from "sonner";
+import { Analytics } from "@vercel/analytics/next";
 
 /*const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,6 +49,7 @@ export default function RootLayout({
           </div>
           <Header />
           {children}
+          <Analytics />
           <Toaster />
 
           <Newsletter />
