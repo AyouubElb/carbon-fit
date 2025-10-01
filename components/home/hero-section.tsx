@@ -2,8 +2,10 @@
 import React, { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { useRouter } from "next/navigation";
 
 const HeroSection = () => {
+  const router = useRouter();
   const heroRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -34,7 +36,10 @@ const HeroSection = () => {
         <p className="text-base font-medium text-[#E8E8E8BF] mb-8 max-w-md mx-auto">
           Get your dream car T-shirt now. Wear your passion
         </p>
-        <button className="border-1 border-[#ecc174] text-[#ecc174] bg-transparent px-6 py-3 text-base font-medium rounded-none uppercase cursor-pointer hover:bg-[#ecc174] hover:text-[#1f1f21] transition">
+        <button
+          onClick={() => router.push("/collections")}
+          className="border-1 border-[#ecc174] text-[#ecc174] bg-transparent px-6 py-3 text-base font-medium rounded-none uppercase cursor-pointer hover:bg-[#ecc174] hover:text-[#1f1f21] transition"
+        >
           Shop Now
         </button>
       </div>

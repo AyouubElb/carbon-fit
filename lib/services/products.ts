@@ -2,6 +2,7 @@ import { supabase } from "../supabaseClient";
 
 export async function getBrands() {
   const { data, error } = await supabase.from("brands").select();
+  if (!data) console.log("No brands");
   if (error) throw error;
   return data;
 }
@@ -37,12 +38,21 @@ interface SupabaseProductRow {
   [key: string]: unknown;
 }
 
-export async function getProducts(): Promise<Product[]> {
-  const { data, error } = await supabase
-    .from("products")
-    .select(
-      "id, title, price, originalPrice, onSale, images, description, brands(name), sizes, created_at"
-    );
+export async function getProducts(brandName?: string): Promise<Product[]> {
+  const baseSelect =
+    "id, title, price, originalPrice, onSale, images, description, brands(name), sizes, created_at";
+
+  const innerSelect =
+    "id, title, price, originalPrice, onSale, images, description, brands!inner(name), sizes, created_at";
+
+  const result = brandName
+    ? await supabase
+        .from("products")
+        .select(innerSelect)
+        .eq("brands.name", brandName)
+    : await supabase.from("products").select(baseSelect);
+
+  const { data, error } = result;
 
   if (error) throw error;
   if (!data) return [];

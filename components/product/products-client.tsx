@@ -6,8 +6,11 @@ import ProductList from "./product-list";
 import Pagination from "./pagination";
 import { getProducts } from "@/lib/services/products";
 import { Product } from "@/lib/types";
+import { useSearchParams } from "next/navigation";
 
 const ProductsClient = () => {
+  const searchParams = useSearchParams();
+
   const [sortBy, setSortBy] = useState("Alphabetically, A-Z");
   const [currentPage, setCurrentPage] = useState(1);
   const [showSortDropdown, setShowSortDropdown] = useState(false);
@@ -19,7 +22,12 @@ const ProductsClient = () => {
 
   useEffect(() => {
     let mounted = true;
-    getProducts().then((data) => {
+
+    const raw = searchParams.get("brand");
+    const brand =
+      raw && raw.trim() !== "" && raw.toLowerCase() !== "all" ? raw : undefined;
+
+    getProducts(brand).then((data) => {
       if (mounted) {
         setProducts(data);
         setLoading(false);

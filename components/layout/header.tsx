@@ -6,8 +6,20 @@ import React, { useEffect, useState } from "react";
 import CartSidebar from "../cart/cart-sidebar";
 import { useCart } from "@/contexts/cart-context";
 import { Badge } from "../ui/badge";
+import { usePathname } from "next/navigation";
+
+const navigation = [
+  { name: "Accueil", href: "/" },
+  {
+    name: "Catalogue",
+    href: "/collections",
+  },
+  { name: "Contact", href: "/contact", icon: ShoppingCart },
+];
 
 const Header = () => {
+  const pathname = usePathname();
+
   const [headerVisible, setHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isAtTop, setIsAtTop] = useState(true);
@@ -84,42 +96,23 @@ const Header = () => {
           </div>
           <div className="hidden md:flex items-center space-x-8">
             <nav className="flex space-x-6">
-              <Link
-                href="/"
-                className={`text-[#E8E8E8BF] text-base font-medium relative hover:text-[#E8E8E8] hover:after:absolute hover:after:bottom-[-3px] hover:after:left-0 hover:after:w-full hover:after:h-[1px] hover:after:bg-[#E8E8E8]
+              {navigation.map((item, index) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    className={`text-[#E8E8E8BF] text-base font-medium relative hover:text-[#E8E8E8] hover:after:absolute hover:after:bottom-[-3px] hover:after:left-0 hover:after:w-full hover:after:h-[1px] hover:after:bg-[#E8E8E8]
                 ${
-                  activeNav === "Accueil"
+                  isActive
                     ? "text-[#E8E8E8] after:absolute after:bottom-[-3px] after:left-0 after:w-full after:h-[1px] after:bg-[#E8E8E8]"
                     : ""
                 }`}
-                onClick={() => handleNavClick("Accueil")}
-              >
-                Accueil
-              </Link>
-              <Link
-                href="/collections"
-                className={`text-[#E8E8E8BF] text-base font-medium relative hover:text-[#E8E8E8] hover:after:absolute hover:after:bottom-[-3px] hover:after:left-0 hover:after:w-full hover:after:h-[1px] hover:after:bg-[#E8E8E8] 
-                ${
-                  activeNav === "Catalogue"
-                    ? "text-[#E8E8E8] after:absolute after:bottom-[-3px] after:left-0 after:w-full after:h-[1px] after:bg-[#E8E8E8]"
-                    : ""
-                }`}
-                onClick={() => handleNavClick("Catalogue")}
-              >
-                Catalogue
-              </Link>
-              <Link
-                href="/contact"
-                className={`text-[#E8E8E8BF] text-base font-medium relative hover:text-[#E8E8E8] hover:after:absolute hover:after:bottom-[-3px] hover:after:left-0 hover:after:w-full hover:after:h-[1px] hover:after:bg-[#E8E8E8]
-                ${
-                  activeNav === "Contact"
-                    ? "text-[#E8E8E8] after:absolute after:bottom-[-3px] after:left-0 after:w-full after:h-[1px] after:bg-[#E8E8E8]"
-                    : ""
-                }`}
-                onClick={() => handleNavClick("Contact")}
-              >
-                Contact
-              </Link>
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
             </nav>
           </div>
 

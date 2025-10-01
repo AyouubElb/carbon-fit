@@ -35,17 +35,17 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
         <div className="flex flex-col h-full">
           {items.length === 0 ? (
             <div className="flex-1 flex flex-col items-center justify-center space-y-4">
-              <ShoppingBag className="h-16 w-16 text-slate-300" />
-              <h3 className="text-[#1f1f21] text-lg font-semibold tracking-wide ">
+              <ShoppingBag className="h-16 w-16 text-[#E8E8E8]" />
+              <h3 className="text-[#E8E8E8] text-lg font-semibold tracking-wide ">
                 Your cart is empty
               </h3>
-              <p className="text-slate-600 text-center font-medium">
+              <p className="text-[#E8E8E8BF] text-center font-medium">
                 Add some products to get started
               </p>
               <Button
                 asChild
                 onClick={onClose}
-                className="h-10 font-medium rounded-none uppercase cursor-pointer"
+                className="bg-[#ecc174] h-10 font-medium rounded-none uppercase cursor-pointer hover:bg-[#ecc174] hover:opacity-90 transition-opacity"
               >
                 <Link href="/collections">Continue Shopping</Link>
               </Button>

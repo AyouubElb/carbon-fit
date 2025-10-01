@@ -2,9 +2,12 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useRef } from "react";
 
 const PromotionSection = () => {
+  const router = useRouter();
+
   const promotionRef = useRef<HTMLElement>(null);
   useGSAP(
     () => {
@@ -63,7 +66,10 @@ const PromotionSection = () => {
           <p className="text-[15px] md:text-lg text-[#E8E8E8BF] font-medium leading-7 md:leading-8 mb-8 max-w-lg">
             Choose a pack from your dream car and get 30% Off with free shipping
           </p>
-          <button className="bg-[#ecc174] text-white/80 px-6 py-3 text-base font-medium rounded-none uppercase cursor-pointer hover:text-white hover:opacity-90 transition-opacity uppercase">
+          <button
+            onClick={() => router.push("/collections")}
+            className="bg-[#ecc174] text-white/80 px-6 py-3 text-base font-medium rounded-none uppercase cursor-pointer hover:text-white hover:opacity-90 transition-opacity uppercase"
+          >
             Shop Now
           </button>
         </div>

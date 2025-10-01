@@ -47,3 +47,8 @@ export interface OrderPayload extends OrderFormData {
   items: OrderItem[];
   total: number;
 }
+
+export interface OrderSheetPayload extends OrderPayload {
+  status: string | "Pending";
+  created_at: string;
+}

@@ -1,11 +1,30 @@
+"use client";
+
 import OrderForm from "@/components/checkout/order-form";
 import OrderSummary from "@/components/checkout/order-summary";
 import { Button } from "@/components/ui/button";
+import { useCart } from "@/contexts/cart-context";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect } from "react";
 
 const CheckoutPage = () => {
+  const { items } = useCart();
+  const router = useRouter();
+
+  console.log("checkout items:", items, items.length);
+
+  useEffect(() => {
+    if (!items || items.length === 0) {
+      router.replace("/collections");
+    }
+  }, [items, router]);
+
+  if (!items || items.length === 0) {
+    return null;
+  }
+
   return (
     <div className="min-h-screen bg-slate-50">
       <div className="mx-auto px-4 py-8 md:px-[50px]">
