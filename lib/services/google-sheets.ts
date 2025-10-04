@@ -128,8 +128,8 @@ async function debugGoogleKey() {
 
     const tokens = await jwt.authorize(); // triggers the decoding / auth step
     console.log("JWT authorize succeeded (debug). Token keys:", Object.keys(tokens));
-  } catch (err: any) {
-    console.error("JWT authorize failed:", err.message || err);
+  } catch (err) {
+    console.error("JWT authorize failed:", err);
     // optionally: console.error(err.stack);
   }
 }
