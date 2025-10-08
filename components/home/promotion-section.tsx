@@ -1,4 +1,5 @@
 "use client";
+import promotionImage from "@/public/images/promotion-image.webp";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Image from "next/image";
@@ -52,25 +53,27 @@ const PromotionSection = () => {
         {/* Product box image */}
         <div className="relative w-full h-full aspect-square">
           <Image
-            src="/images/promotion-image.webp"
+            src={promotionImage}
             alt="RACER WEAR box with two Porsche t-shirts"
             className="w-full h-full object-cover"
             fill
+            placeholder="blur"
           />
         </div>
         {/* Text content*/}
         <div className="h-full text-left px-10 pt-10 pb-12.5 md:px-20 md:pb-20 md:pt-16">
-          <h2 className="font-heading text-[42px] md:text-6xl text-[#E8E8E8] font-medium tracking-wide leading-12 md:leading-18 mb-5">
-            BUY 2 AND GET 30% OFF
+          <h2 className="font-heading text-[42px] md:text-6xl text-[#E8E8E8] font-medium tracking-wide leading-12 md:leading-18 mb-5 uppercase">
+            ACHETEZ 2, OBTENEZ 30% de réduction
           </h2>
           <p className="text-[15px] md:text-lg text-[#E8E8E8BF] font-medium leading-7 md:leading-8 mb-8 max-w-lg">
-            Choose a pack from your dream car and get 30% Off with free shipping
+            Choisissez un pack de votre voiture de rêve et profitez de 30% de
+            réduction avec livraison gratuite.
           </p>
           <button
             onClick={() => router.push("/collections")}
             className="bg-[#ecc174] text-white/80 px-6 py-3 text-base font-medium rounded-none uppercase cursor-pointer hover:text-white hover:opacity-90 transition-opacity uppercase"
           >
-            Shop Now
+            Acheter maintenant
           </button>
         </div>
       </div>

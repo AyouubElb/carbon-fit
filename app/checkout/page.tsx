@@ -37,14 +37,14 @@ const CheckoutPage = () => {
           >
             <Link href="/collections">
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Products
+              Retour aux Produits
             </Link>
           </Button>
           <h1 className="font-heading text-[56px] md:text-[72px] font-medium text-slate-900">
             Checkout
           </h1>
           <p className="font-medium text-slate-600">
-            Complete your order with cash on delivery
+            Finalisez votre commande en choisissant le paiement à la livraison
           </p>
         </div>
 

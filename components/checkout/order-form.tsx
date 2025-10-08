@@ -112,14 +112,14 @@ const OrderForm = () => {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <User className="h-5 w-5" />
-          Delivery Information
+          Informations de livraison
         </CardTitle>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {/* Personal Information */}
           <div className="space-y-2">
-            <Label htmlFor="fullName">Full Name *</Label>
+            <Label htmlFor="fullName">Nom complet *</Label>
             <Input
               id="fullName"
               {...register("fullName")}
@@ -135,7 +135,7 @@ const OrderForm = () => {
           <div className="space-y-2">
             <Label htmlFor="email" className="flex items-center gap-2">
               <Mail className="h-4 w-4" />
-              Email Address *
+              Adresse e-mail *
             </Label>
             <Input
               id="email"
@@ -153,7 +153,7 @@ const OrderForm = () => {
           <div className="space-y-2">
             <Label htmlFor="phone" className="flex items-center gap-2">
               <Phone className="h-4 w-4" />
-              Phone Number *
+              Numéro de téléphone *
             </Label>
             <Input
               id="phone"
@@ -174,11 +174,11 @@ const OrderForm = () => {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold flex items-center gap-2">
               <MapPin className="h-5 w-5" />
-              Delivery Address
+              Adresse de livraison
             </h3>
 
             <div className="space-y-2">
-              <Label htmlFor="address">Street Address *</Label>
+              <Label htmlFor="address">Adresse (rue) *</Label>
               <Input
                 id="address"
                 {...register("address")}
@@ -193,7 +193,7 @@ const OrderForm = () => {
 
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="city">City *</Label>
+                <Label htmlFor="city">Ville *</Label>
                 <Input id="city" {...register("city")} className="bg-white" />
                 {errors.city && (
                   <span className="text-red-500 text-sm">
@@ -202,7 +202,7 @@ const OrderForm = () => {
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="postalCode">Postal Code *</Label>
+                <Label htmlFor="postalCode">Code postal *</Label>
                 <Input
                   id="postalCode"
                   {...register("postalCode")}
@@ -218,7 +218,7 @@ const OrderForm = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="notes">Order Notes (Optional)</Label>
+            <Label htmlFor="notes">Remarques de commande (facultatif)</Label>
             <Textarea
               id="notes"
               {...register("notes")}
@@ -241,10 +241,10 @@ const OrderForm = () => {
             {isLoading ? (
               <span className="flex items-center justify-center gap-x-2">
                 <Loader2 className="size-4 animate-spin" />
-                Place Order (Cash on Delivery)
+                Commander (Paiement à la livraison)
               </span>
             ) : (
-              "Place Order (Cash on Delivery)"
+              "Commander (Paiement à la livraison)"
             )}
           </Button>
         </form>

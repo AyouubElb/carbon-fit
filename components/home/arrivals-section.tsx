@@ -9,11 +9,11 @@ const ArrivalsSection = () => {
   return (
     <section className="px-4 py-7 md:p-[50px]">
       <div className="mb-6">
-        <h2 className="font-heading text-[42px] md:text-[56px] text-[#E8E8E8] font-medium mb-2 md:mb-2">
-          NEW ARRIVALS
+        <h2 className="font-heading text-[42px] md:text-[56px] text-[#E8E8E8] font-medium uppercase mb-2 md:mb-2">
+          NOUVEAUTÉS
         </h2>
         <p className="text-base text-[#E8E8E8BF] max-w-lg">
-          Limited Edition On All Items
+          Édition limitée sur tous les articles
         </p>
       </div>
       <div className="mb-10">

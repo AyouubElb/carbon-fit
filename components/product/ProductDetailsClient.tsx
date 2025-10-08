@@ -29,12 +29,12 @@ const ProductDetailsClient = ({ product }: ProductDetailsClientProps) => {
       const containerRect = containerRef.current.getBoundingClientRect();
       const leftHeight = leftSideRef.current.offsetHeight;
       const rightHeight = rightSideRef.current.offsetHeight;
-      const viewportHeight = window.innerHeight;
+      //const viewportHeight = window.innerHeight;
 
       // Calculate when left side should stop being sticky
       const shouldStick =
         containerRect.top <= 0 &&
-        containerRect.bottom > leftHeight + 100 &&
+        containerRect.bottom + 500 > leftHeight &&
         rightHeight > leftHeight;
 
       setIsSticky(shouldStick);

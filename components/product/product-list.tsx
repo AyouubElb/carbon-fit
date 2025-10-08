@@ -29,7 +29,7 @@ const ProductList = ({ products, variant }: ProductListProps) => {
         >
           <div
             className={`relative w-full overflow-hidden
-            ${variant === "products" ? "aspect-[5/6]" : "aspect-square"}
+            ${variant === "products" ? "aspect-[8/9]" : "aspect-square"}
           `}
           >
             <Image

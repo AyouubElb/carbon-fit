@@ -21,7 +21,10 @@ interface CartState {
 
 type CartAction =
   | { type: "ADD_ITEM"; payload: CartItem }
-  | { type: "REMOVE_ITEM"; payload: string }
+  | {
+      type: "REMOVE_ITEM";
+      payload: { id: string; size?: string; color?: string };
+    }
   | { type: "UPDATE_QUANTITY"; payload: { id: string; quantity: number } }
   | { type: "CLEAR_CART" }
   | { type: "LOAD_CART"; payload: CartItem[] };
@@ -30,7 +33,7 @@ const CartContext = createContext<{
   items: CartItem[];
   total: number;
   addItem: (item: CartItem) => void;
-  removeItem: (id: string) => void;
+  removeItem: (id: string, size?: string, color?: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
 } | null>(null);
@@ -73,7 +76,15 @@ function cartReducer(state: CartState, action: CartAction): CartState {
     }
 
     case "REMOVE_ITEM": {
-      const newItems = state.items.filter((item) => item.id !== action.payload);
+      const { id, size, color } = action.payload;
+      const newItems = state.items.filter((item) => {
+        const idMatches = item.id === id;
+        const sizeMatches = size === undefined ? true : item.size === size;
+        const colorMatches = color === undefined ? true : item.color === color;
+        // Keep item if NOT all provided identifiers match
+        return !(idMatches && sizeMatches && colorMatches);
+      });
+
       return {
         items: newItems,
         total: newItems.reduce(
@@ -141,8 +152,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "ADD_ITEM", payload: item });
   };
 
-  const removeItem = (id: string) => {
-    dispatch({ type: "REMOVE_ITEM", payload: id });
+  const removeItem = (id: string, size?: string, color?: string) => {
+    dispatch({ type: "REMOVE_ITEM", payload: { id, size, color } });
   };
 
   const updateQuantity = (id: string, quantity: number) => {

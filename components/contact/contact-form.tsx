@@ -7,7 +7,7 @@ const ContactForm = () => {
         <div>
           <input
             type="text"
-            placeholder="Name"
+            placeholder="Nom"
             className="w-full bg-transparent border-2 border-[#E8E8E8BF] text-[#E8E8E8] py-3.5 px-5 text-base font-medium focus:outline-none focus:border-[#E8E8E8] transition-colors duration-200 rounded-none placeholder:text-[#E8E8E8BF]"
           />
         </div>
@@ -23,8 +23,8 @@ const ContactForm = () => {
 
       <div>
         <input
-          type="tel"
-          placeholder="Phone number"
+          type="text"
+          placeholder="Numéro de téléphone"
           className="w-full bg-transparent border-2 border-[#E8E8E8BF] text-[#E8E8E8] py-3.5 px-5 text-base font-medium focus:outline-none focus:border-[#E8E8E8] transition-colors duration-200 rounded-none placeholder:text-[#E8E8E8BF]"
         />
       </div>
@@ -32,7 +32,7 @@ const ContactForm = () => {
       {/* Third row: Comment textarea (full width) */}
       <div>
         <textarea
-          placeholder="Comment"
+          placeholder="Commentaire"
           rows={6}
           className="w-full bg-transparent border-2 border-[#E8E8E8BF] text-[#E8E8E8] py-3.5 px-5 text-base font-medium focus:outline-none focus:border-[#E8E8E8] transition-colors duration-200 rounded-none placeholder:text-[#E8E8E8BF] resize-none"
         ></textarea>
@@ -43,7 +43,7 @@ const ContactForm = () => {
           type="submit"
           className="bg-[rgb(236,193,116)] text-black py-3.5 px-10 md:px-12 text-base font-medium hover:bg-[rgb(226,183,106)] transition-colors duration-200 rounded-none uppercase"
         >
-          Send
+          Envoyer
         </button>
       </div>
     </form>

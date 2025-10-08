@@ -42,8 +42,8 @@ const reviews = [
 const ReviewsSection = () => {
   return (
     <section className="px-4 py-7 md:p-[50px]">
-      <h2 className="font-heading text-[42px] md:text-[56px] text-[#E8E8E8] font-medium mb-5 md:mb-8">
-        CLIENTS REVIEWS
+      <h2 className="font-heading text-[42px] md:text-[56px] text-[#E8E8E8] font-medium uppercase mb-5 md:mb-8">
+        AVIS CLIENTS
       </h2>
       <div className="grid md:grid-cols-3 gap-10 mb-8">
         {reviews.map((review) => (

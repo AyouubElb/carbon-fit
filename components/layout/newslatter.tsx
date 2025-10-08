@@ -8,10 +8,11 @@ const Newsletter = () => {
       <div className="mx-auto">
         <div className="mb-5">
           <h2 className="font-heading text-[42px] md:text-6xl text-[#E8E8E8] font-medium leading-12 md:leading-18 md:tracking-wide uppercase mb-5">
-            Subscribe To Our Emails
+            Abonnez-vous à nos email
           </h2>
           <p className="text-[15px] md:text-lg text-[#E8E8E8BF] font-medium">
-            Be the first to know about new collections and exclusive offers.
+            Soyez le premier informé des nouvelles collections et des offres
+            exclusives.{" "}
           </p>
         </div>
 
@@ -41,9 +42,9 @@ const Newsletter = () => {
 
         {/* Footer text */}
         <div className="text-[14px] text-[#E8E8E8BF] space-x-4">
-          <span>© 2025, Racerwears Powered by Shopify</span>
+          <span>© 2025, CarbonFit. Développé avec passion.</span>
           <span>•</span>
-          <span>Privacy policy</span>
+          <span>Politique de confidentialité</span>
         </div>
       </div>
     </section>

@@ -23,7 +23,10 @@ const ProductImages = ({
   return (
     <div
       ref={leftSideRef}
-      className={`${isSticky ? "md:sticky" : ""} md:h-fit`}
+      className={`md:top-0 ${
+        isSticky ? "md:sticky md:top-32" : ""
+      } md:h-fit transition-all duration-300 ease-in-out`}
+      style={{ willChange: "top" }}
     >
       {/* Main Product Image */}
       <div className="relative w-full bg-gray-100 rounded-none mb-4 aspect-square">

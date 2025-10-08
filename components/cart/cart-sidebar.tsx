@@ -28,7 +28,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
         <SheetHeader>
           <SheetTitle className="flex items-center gap-2 text-[#E8E8E8] font-heading text-xl font-medium tracking-wide uppercase">
             <ShoppingBag className="h-5 w-5" />
-            Shopping Cart ({items.length})
+            Panier ({items.length})
           </SheetTitle>
         </SheetHeader>
 
@@ -37,17 +37,17 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             <div className="flex-1 flex flex-col items-center justify-center space-y-4">
               <ShoppingBag className="h-16 w-16 text-[#E8E8E8]" />
               <h3 className="text-[#E8E8E8] text-lg font-semibold tracking-wide ">
-                Your cart is empty
+                Votre panier est vide
               </h3>
               <p className="text-[#E8E8E8BF] text-center font-medium">
-                Add some products to get started
+                Ajoutez des articles pour commencer
               </p>
               <Button
                 asChild
                 onClick={onClose}
                 className="bg-[#ecc174] h-10 font-medium rounded-none uppercase cursor-pointer hover:bg-[#ecc174] hover:opacity-90 transition-opacity"
               >
-                <Link href="/collections">Continue Shopping</Link>
+                <Link href="/collections">Continuer vos achats</Link>
               </Button>
             </div>
           ) : (
@@ -133,7 +133,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                             variant="ghost"
                             size="icon"
                             className="h-7 w-7 text-red-500 hover:text-red-700 hover:bg-red-50 cursor-pointer"
-                            onClick={() => removeItem(item.id)}
+                            onClick={() => removeItem(item.id, item.size)}
                           >
                             <Trash2 className="h-3 w-3" />
                           </Button>
@@ -161,7 +161,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                     className="w-full text-base font-medium border border-1 border-[#ecc174] text-[#ecc174] bg-transparent rounded-none"
                     onClick={onClose}
                   >
-                    <Link href="/checkout">Proceed to Checkout</Link>
+                    <Link href="/checkout">Finaliser l’achat</Link>
                   </Button>
                   <Button
                     className="w-full text-base font-medium bg-transparent text-[#ecc174] hover:bg-transparent cursor-pointer"
@@ -170,7 +170,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                   >
                     <Link href="/collections">
                       <span className="relative after:absolute after:bottom-[-3px] after:left-0 after:w-full after:h-[1px] after:bg-[#ecc174]">
-                        Continue Shopping
+                        Continuer vos achats
                       </span>
                     </Link>
                   </Button>

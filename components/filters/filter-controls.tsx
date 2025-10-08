@@ -13,12 +13,12 @@ interface FilterControlsProps {
 }
 
 const sortOptions = [
-  "Alphabetically, A-Z",
-  "Alphabetically, Z-A",
-  "Price, low to high",
-  "Price, high to low",
-  "Date, old to new",
-  "Date, new to old",
+  "Alphabétique, A-Z",
+  "Alphabétique, Z-A",
+  "Prix, du plus bas au plus élevé",
+  "Prix, du plus élevé au plus bas",
+  "Date, de l’ancien au plus récent",
+  "Date, du plus récent au plus ancien",
 ];
 
 const FilterControls = ({
@@ -37,13 +37,13 @@ const FilterControls = ({
         className="flex items-center gap-2 text-[#ecc174] text-base md:text-lg font-medium hover:text-[#E8E8E8] transition-colors cursor-pointer"
       >
         <Filter size={16} />
-        Filter
+        Filtrer
         <span className="md:hidden"> & Sort</span>
       </button>
 
       <div className="flex items-center gap-8 text-sm md:text-base text-[#E8E8E8BF] font-medium">
         <div className="hidden md:flex gap-4">
-          <span>Sort by:</span>
+          <span>Trier par:</span>
           <div className="relative">
             <button
               onClick={() => setShowSortDropdown(!showSortDropdown)}
@@ -72,7 +72,7 @@ const FilterControls = ({
           </div>
         </div>
         <span className="text-[#E8E8E8BF] ">
-          {filteredProducts.length} products
+          {filteredProducts.length} produits
         </span>
       </div>
     </div>

@@ -8,11 +8,14 @@ import { getProducts } from "@/lib/services/products";
 import { Product } from "@/lib/types";
 import { useSearchParams } from "next/navigation";
 
+const PAGE_SIZE = 12;
+
 const ProductsClient = () => {
   const searchParams = useSearchParams();
 
   const [sortBy, setSortBy] = useState("Alphabetically, A-Z");
   const [currentPage, setCurrentPage] = useState(1);
+  const [numberOfPages, setNumberOfPages] = useState(1);
   const [showSortDropdown, setShowSortDropdown] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
@@ -85,6 +88,30 @@ const ProductsClient = () => {
     }
   });
 
+  // Update number of pages whenever the filtered+sorted list changes
+  useEffect(() => {
+    const pages = Math.max(
+      1,
+      Math.ceil(sortedAndFilteredProducts.length / PAGE_SIZE)
+    );
+    setNumberOfPages(pages);
+
+    // If current page is out of range after filtering, reset to 1
+    if (currentPage > pages) {
+      setCurrentPage(1);
+    }
+  }, [sortedAndFilteredProducts.length, currentPage]);
+
+  // Reset to first page when user changes filters or sorting (good UX)
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedBrands, selectedPriceRange, sortBy]);
+
+  // Slice the sorted & filtered products for the current page
+  const pageStart = (currentPage - 1) * PAGE_SIZE;
+  const pageEnd = pageStart + PAGE_SIZE;
+  const pageProducts = sortedAndFilteredProducts.slice(pageStart, pageEnd);
+
   const handleBrandChange = (brand: string) => {
     setSelectedBrands((prev) =>
       prev.includes(brand) ? prev.filter((b) => b !== brand) : [...prev, brand]
@@ -126,11 +153,15 @@ const ProductsClient = () => {
 
       {/* Product Grid */}
       <div className="mb-16">
-        <ProductList products={sortedAndFilteredProducts} variant="products" />
+        <ProductList products={pageProducts} variant="products" />
       </div>
 
       {/* Pagination */}
-      <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalPages={numberOfPages}
+      />
     </div>
   );
 };

@@ -13,7 +13,7 @@ const OrderSummary = () => {
     <div className="space-y-6">
       <Card className="bg-white rounded-xl py-6 gap-0 space-y-2 shadow-sm">
         <CardHeader>
-          <CardTitle>Order Summary</CardTitle>
+          <CardTitle>Récapitulatif de la commande</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           {items.map((item) => (
@@ -59,12 +59,12 @@ const OrderSummary = () => {
 
           <div className="space-y-2 font-medium">
             <div className="flex justify-between">
-              <span>Subtotal:</span>
+              <span>Sous-total:</span>
               <span>${total.toFixed(2)}</span>
             </div>
             <div className="flex justify-between">
-              <span>Shipping:</span>
-              <span className="text-lime-600">Free</span>
+              <span>Livraison:</span>
+              <span className="text-lime-600">Gratuite</span>
             </div>
             <Separator />
             <div className="flex justify-between text-lg font-bold">
@@ -79,10 +79,12 @@ const OrderSummary = () => {
       <Card className="py-6 rounded-xl bg-emerald-50 border border-solid border-emerald-200 shadow-sm">
         <CardContent className="p-6">
           <div className="text-center space-y-2">
-            <h3 className="font-semibold text-lime-800">Cash on Delivery</h3>
+            <h3 className="font-semibold text-lime-800">
+              Paiement à la livraison
+            </h3>
             <p className="text-sm text-lime-700">
-              Pay when your order arrives at your doorstep. No advance payment
-              required.
+              Payez à la livraison lorsque votre commande vous est livrée. Aucun
+              paiement à l’avance requis.
             </p>
           </div>
         </CardContent>

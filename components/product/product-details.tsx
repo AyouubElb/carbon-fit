@@ -14,32 +14,37 @@ interface ProductDetailsProps {
 
 const ProductDetails = ({ product, rightSideRef }: ProductDetailsProps) => {
   const { addItem } = useCart();
-  const [selectedSize, setSelectedSize] = useState("XS");
+  const [selectedSize, setSelectedSize] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
 
-  const subtotal = product.price * quantity;
-  const total = subtotal; // Free shipping
+  //const subtotal = product.price * quantity;
+  //const total = subtotal; // Free shipping
 
   const handleAddToCart = async () => {
     if (!selectedSize) return;
 
     setIsAdding(true);
+    try {
+      // Simulate adding to cart
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
-    // Simulate adding to cart
-    await new Promise((resolve) => setTimeout(resolve, 500));
+      addItem({
+        id: product.id,
+        name: product.title,
+        brand: product.brands.name,
+        price: product.price,
+        image: product.images[0],
+        size: selectedSize,
+        quantity: quantity,
+      });
 
-    addItem({
-      id: product.id,
-      name: product.title,
-      brand: product.brands.name,
-      price: product.price,
-      image: product.images[0],
-      size: selectedSize,
-      quantity: quantity,
-    });
+      setSelectedSize("");
 
-    setIsAdding(false);
+      setIsAdding(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div ref={rightSideRef} className="space-y-8">
@@ -64,7 +69,7 @@ const ProductDetails = ({ product, rightSideRef }: ProductDetailsProps) => {
           </span>
           {product.onSale && (
             <Badge className="bg-white text-xs md:text-sm text-[#1F1F21] font-medium rounded-full px-[13px] py-[3px] ">
-              Sale
+              Promotion
             </Badge>
           )}
         </div>
@@ -72,7 +77,7 @@ const ProductDetails = ({ product, rightSideRef }: ProductDetailsProps) => {
         {/* Size Selection */}
         <div className="mb-8">
           <h3 className="text-[#E8E8E8] text-base md:text-lg font-medium mb-2">
-            Size
+            Taille
           </h3>
           <div className="flex flex-wrap gap-3">
             {product.sizes.map((size) => (
@@ -94,7 +99,7 @@ const ProductDetails = ({ product, rightSideRef }: ProductDetailsProps) => {
         {/* Quantity */}
         <div className="mb-8">
           <h3 className="text-[#E8E8E8] text-base md:text-lg font-medium mb-2">
-            Quantity ({quantity} in cart)
+            Quantité ({quantity} dans le panier)
           </h3>
           <div className="flex items-center border border-[#E8E8E8BF] rounded-none w-fit">
             <button
@@ -122,18 +127,17 @@ const ProductDetails = ({ product, rightSideRef }: ProductDetailsProps) => {
       <Button
         variant="outline"
         className="w-full border-[#ecc174] text-[#ecc174] py-6 text-base md:text-lg font-medium rounded-none hover:bg-[#ecc174] hover:text-[#1F1F21] bg-transparent cursor-pointer"
-        disabled={!selectedSize || isAdding}
         onClick={handleAddToCart}
       >
         {isAdding ? (
           <>
             <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-            Adding...
+            Ajout...
           </>
         ) : (
           <>
             <CheckCircle className="h-5 w-5 mr-2" />
-            Add to Cart - ${(product.price * quantity).toFixed(2)}
+            Ajouter au panier - ${(product.price * quantity).toFixed(2)}
           </>
         )}
       </Button>
@@ -141,20 +145,6 @@ const ProductDetails = ({ product, rightSideRef }: ProductDetailsProps) => {
       {/* Product Features */}
       <div className="space-y-2 text-[#E8E8E8BF] text-base md:text-lg font-medium">
         <div dangerouslySetInnerHTML={{ __html: product.description }} />
-        {/*<p className="text-[#E8E8E8BF]">{product.description}</p>
-        <div className="space-y-2">
-          {product.features.map((feature, index) => (
-            <div
-              key={index}
-              className="flex items-center gap-3 text-[#E8E8E8BF]"
-            >
-              <span className="text-[#ecc174]">
-                {index === 2 ? "🚚" : index === 3 ? "⚡" : "✓"}
-              </span>
-              <span>{feature}</span>
-            </div>
-          ))}
-        </div>*/}
       </div>
     </div>
   );
