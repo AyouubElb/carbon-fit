@@ -48,7 +48,7 @@ const ProductDetailsClient = ({ product }: ProductDetailsClientProps) => {
 
   return (
     <div ref={containerRef} className="px-4 py-7 md:p-[50px]">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+      <div className="grid grid-cols-1 md:grid-cols-7 gap-8 md:gap-16">
         {/* Left Side - Product Images */}
         <ProductImages
           images={product.images}

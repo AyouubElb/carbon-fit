@@ -64,11 +64,9 @@ export async function appendOrderToSheet(order: OrderSheetPayload) {
 
   const row = [
     String(order.fullName ?? ""),
-    String(order.email ?? ""),
     String(order.phone ?? ""),
     String(order.address ?? ""),
     String(order.city ?? ""),
-    String(order.postalCode ?? ""),
     order.notes ?? "",
     Array.isArray(order.items)
       ? JSON.stringify(order.items)
@@ -95,3 +93,53 @@ export async function appendOrderToSheet(order: OrderSheetPayload) {
     },
   });
 }
+
+/*
+async function debugGoogleKey() {
+  const clientEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+  const rawKey = process.env.GOOGLE_PRIVATE_KEY;
+
+  console.log("GSA EMAIL present:", Boolean(clientEmail));
+  console.log("GSA PRIVATE KEY present:", Boolean(rawKey));
+
+  if (!rawKey) return;
+
+  // try common sanitization
+  const singleLineEscaped = rawKey.includes("\\n");
+
+  let privateKey = singleLineEscaped ? rawKey.replace(/\\n/g, "\n") : rawKey;
+  privateKey = privateKey.replace(/^\uFEFF/, ""); // remove BOM
+  privateKey = privateKey.replace(/\u200B/g, ""); // remove zero-width space
+  privateKey = privateKey.replace(/\r/g, ""); // normalize CRLF -> LF
+  privateKey = privateKey.trim();
+  console.log(
+    "Private key looks multiline:",
+    privateKey.includes("-----BEGIN")
+  );
+  console.log(
+    "Private key ends with footer:",
+    privateKey.includes("-----END PRIVATE KEY-----")
+  );
+  console.log(
+    "Contains non-ascii chars:",
+    /[^\x00-\x7F]/.test(privateKey) ? true : false
+  );
+  // Attempt to create JWT and authorize
+  try {
+    const jwt = new google.auth.JWT({
+      email: clientEmail!,
+      key: privateKey,
+      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+    });
+    const tokens = await jwt.authorize(); // triggers the decoding / auth step
+    console.log(
+      "JWT authorize succeeded (debug). Token keys:",
+      Object.keys(tokens)
+    );
+  } catch (err) {
+    console.error("JWT authorize failed:", err);
+  }
+}
+// call it once at startup for debugging
+debugGoogleKey().catch((e) => console.error("debug error:", e));
+*/

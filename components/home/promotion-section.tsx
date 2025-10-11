@@ -5,53 +5,78 @@ import gsap from "gsap";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useRef } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const PromotionSection = () => {
   const router = useRouter();
 
   const promotionRef = useRef<HTMLElement>(null);
+
+  gsap.registerPlugin(ScrollTrigger);
+
   useGSAP(
     () => {
-      const tl = gsap.timeline({
+      // scoped selector (queries only inside promotionRef)
+      const q = gsap.utils.selector(promotionRef);
+
+      // image animation (has its own ScrollTrigger)
+      gsap.from(q(".promotion-image"), {
+        y: 40,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power1.inOut",
+        stagger: 0.1,
         scrollTrigger: {
           trigger: promotionRef.current,
-          start: "top 80%",
-          once: true,
+          start: "top center",
+          toggleActions: "play none none none",
           markers: false,
         },
       });
 
-      tl.from(" .promotion-content", {
+      // text content animation (own ScrollTrigger)
+      gsap.from(q(".promotion-text-content"), {
         y: 40,
         opacity: 0,
-        duration: 0.8,
+        duration: 0.6,
+        delay: 0.2,
         ease: "power1.inOut",
         stagger: 0.1,
+        scrollTrigger: {
+          trigger: promotionRef.current,
+          start: "top center",
+          toggleActions: "play none none none",
+          markers: false,
+        },
       });
 
-      //cards
-      tl.fromTo(
-        ".testimonial-card",
-        {
-          y: 40,
-          opacity: 0,
-        },
+      // testimonial cards (fromTo) with own ScrollTrigger
+      gsap.fromTo(
+        q(".testimonial-card"),
+        { y: 40, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
+          duration: 0.6,
           ease: "power1.inOut",
           stagger: 0.4,
+          scrollTrigger: {
+            trigger: promotionRef.current,
+            start: "top center",
+            toggleActions: "play none none none",
+            markers: false,
+          },
         }
       );
     },
     { scope: promotionRef }
   );
+
   return (
     <section ref={promotionRef} className="px-4 py-7 md:p-[50px]">
       <div className="promotion-content grid md:grid-cols-2 items-center">
         {/* Product box image */}
-        <div className="relative w-full h-full aspect-square">
+        <div className="promotion-image relative w-full h-full aspect-square">
           <Image
             src={promotionImage}
             alt="RACER WEAR box with two Porsche t-shirts"
@@ -61,7 +86,7 @@ const PromotionSection = () => {
           />
         </div>
         {/* Text content*/}
-        <div className="h-full text-left px-10 pt-10 pb-12.5 md:px-20 md:pb-20 md:pt-16">
+        <div className="promotion-text-content h-full text-left px-10 pt-10 pb-12.5 md:px-20 md:pb-20 md:pt-16">
           <h2 className="font-heading text-[42px] md:text-6xl text-[#E8E8E8] font-medium tracking-wide leading-12 md:leading-18 mb-5 uppercase">
             ACHETEZ 2, OBTENEZ 30% de réduction
           </h2>

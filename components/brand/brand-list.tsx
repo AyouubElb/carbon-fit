@@ -1,21 +1,54 @@
 "use client";
 import { Brand } from "@/lib/types";
-import React, { use } from "react";
+import React, { use, useRef } from "react";
 import { Card, CardContent } from "../ui/card";
 import { ArrowRight } from "lucide-react";
 import { SUPABASE_IMAGE_URL } from "@/lib/supabaseClient";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 const BrandList = ({ brands }: { brands: Promise<Brand[]> }) => {
   const router = useRouter();
   const brandList = use(brands);
+
+  const brandListRef = useRef<HTMLDivElement | null>(null);
+
+  gsap.registerPlugin(ScrollTrigger);
+  useGSAP(
+    () => {
+      // scoped selector (queries only inside promotionRef)
+      const q = gsap.utils.selector(brandListRef);
+
+      gsap.from(q(".brand-list-card"), {
+        y: 40,
+        opacity: 0,
+        duration: 0.6,
+        delay: 0.1,
+        ease: "power1.inOut",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: brandListRef.current,
+          start: "top center",
+          toggleActions: "play none none none",
+          markers: false,
+        },
+      });
+    },
+    { scope: brandListRef }
+  );
+
   return (
-    <>
+    <div
+      ref={brandListRef}
+      className="grid md:grid-cols-3 gap-5 md:gap-10 flex-wrap"
+    >
       {brandList.map((brand) => (
         <Card
           key={brand.id}
-          className="relative group rounded-none gap-0 p-0 border-none bg-transparent"
+          className="brand-list-card relative group rounded-none gap-0 p-0 border-none bg-transparent"
         >
           <div className="relative w-full max-w-xl mb-2 aspect-[5/6] overflow-hidden">
             <Image
@@ -39,7 +72,7 @@ const BrandList = ({ brands }: { brands: Promise<Brand[]> }) => {
           </CardContent>
         </Card>
       ))}
-    </>
+    </div>
   );
 };
 

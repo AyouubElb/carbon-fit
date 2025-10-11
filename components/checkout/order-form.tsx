@@ -132,7 +132,7 @@ const OrderForm = () => {
             )}
           </div>
 
-          <div className="space-y-2">
+          {/* <div className="space-y-2">
             <Label htmlFor="email" className="flex items-center gap-2">
               <Mail className="h-4 w-4" />
               Adresse e-mail *
@@ -148,7 +148,7 @@ const OrderForm = () => {
                 {errors?.email?.message}
               </span>
             )}
-          </div>
+          </div>*/}
 
           <div className="space-y-2">
             <Label htmlFor="phone" className="flex items-center gap-2">
@@ -201,6 +201,7 @@ const OrderForm = () => {
                   </span>
                 )}
               </div>
+              {/*
               <div className="space-y-2">
                 <Label htmlFor="postalCode">Code postal *</Label>
                 <Input
@@ -214,6 +215,7 @@ const OrderForm = () => {
                   </span>
                 )}
               </div>
+              */}
             </div>
           </div>
 

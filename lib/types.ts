@@ -21,13 +21,9 @@ export interface Brand {
 
 export const orderSchema = z.object({
   fullName: z.string().min(2, "Full name must be at least 2 characters long"),
-  email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 characters long"),
   address: z.string().min(5, "Address must be at least 5 characters long"),
   city: z.string().min(2, "City must be at least 2 characters long"),
-  postalCode: z
-    .string()
-    .min(2, "Postal code must be at least 2 characters long"),
   notes: z.string().max(500, "Notes must be at most 500 characters long"),
 });
 

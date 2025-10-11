@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { useCart } from "@/contexts/cart-context";
+import OrderSummary from "./order-summary";
 
 interface ProductDetailsProps {
   product: Product;
@@ -17,9 +18,6 @@ const ProductDetails = ({ product, rightSideRef }: ProductDetailsProps) => {
   const [selectedSize, setSelectedSize] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
-
-  //const subtotal = product.price * quantity;
-  //const total = subtotal; // Free shipping
 
   const handleAddToCart = async () => {
     if (!selectedSize) return;
@@ -47,7 +45,7 @@ const ProductDetails = ({ product, rightSideRef }: ProductDetailsProps) => {
     }
   };
   return (
-    <div ref={rightSideRef} className="space-y-8">
+    <div ref={rightSideRef} className="md:col-span-3 space-y-8">
       {/* Product Info */}
       <div>
         <p className="text-[#E8E8E8BF] text-sm font-medium uppercase mb-2">
@@ -122,9 +120,14 @@ const ProductDetails = ({ product, rightSideRef }: ProductDetailsProps) => {
       </div>
 
       {/* Order Summary */}
+      <OrderSummary
+        product={product}
+        selectedSize={selectedSize}
+        quantity={quantity}
+      />
 
       {/* Add to Cart Button */}
-      <Button
+      {/* <Button
         variant="outline"
         className="w-full border-[#ecc174] text-[#ecc174] py-6 text-base md:text-lg font-medium rounded-none hover:bg-[#ecc174] hover:text-[#1F1F21] bg-transparent cursor-pointer"
         onClick={handleAddToCart}
@@ -140,7 +143,7 @@ const ProductDetails = ({ product, rightSideRef }: ProductDetailsProps) => {
             Ajouter au panier - ${(product.price * quantity).toFixed(2)}
           </>
         )}
-      </Button>
+      </Button>*/}
 
       {/* Product Features */}
       <div className="space-y-2 text-[#E8E8E8BF] text-base md:text-lg font-medium">

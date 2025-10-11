@@ -1,5 +1,5 @@
 "use client";
-import React, { use } from "react";
+import React, { use, useRef } from "react";
 import { Card, CardContent } from "../ui/card";
 import { Product } from "../../lib/types";
 import { useRouter } from "next/navigation";
@@ -24,7 +24,7 @@ const ProductList = ({ products, variant }: ProductListProps) => {
       {productList.map((product) => (
         <Card
           key={product.id}
-          className="group cursor-pointer"
+          className="product-list-card group cursor-pointer"
           onClick={() => router.push(`/products/${product.id}`)}
         >
           <div

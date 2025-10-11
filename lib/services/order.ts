@@ -9,11 +9,9 @@ export const supabaseAdmin = createBrowserClient(url, key);
 export const createOrder = async (orderData: OrderPayload) => {
   const insertPayload = {
     full_name: orderData.fullName,
-    email: orderData.email,
     phone: orderData.phone,
     address: orderData.address,
     city: orderData.city,
-    postal_code: orderData.postalCode,
     notes: orderData.notes ?? null,
     total: orderData.total,
     order_items: orderData.items,
@@ -37,11 +35,9 @@ export const createOrder = async (orderData: OrderPayload) => {
   try {
     const orderForSheet: OrderSheetPayload = {
       fullName: data.full_name ?? orderData.fullName,
-      email: data.email ?? orderData.email,
       phone: data.phone ?? orderData.phone,
       address: data.address ?? orderData.address,
       city: data.city ?? orderData.city,
-      postalCode: data.postal_code ?? orderData.postalCode,
       notes: data.notes ?? orderData.notes,
       items: data.order_items ?? orderData.items,
       total: data.total ?? orderData.total,

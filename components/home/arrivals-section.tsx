@@ -1,7 +1,5 @@
-import React, { Suspense } from "react";
-import ProductList from "../product/product-list";
 import { getProducts } from "@/lib/services/products";
-import ViewAllButton from "../ui/view-all-button";
+import ProductListWrapper from "../product/product-list-wrapper";
 
 const ArrivalsSection = () => {
   const products = getProducts();
@@ -16,12 +14,7 @@ const ArrivalsSection = () => {
           Édition limitée sur tous les articles
         </p>
       </div>
-      <div className="mb-10">
-        <Suspense fallback={<div>Loading...</div>}>
-          <ProductList products={products} />
-        </Suspense>
-      </div>
-      <ViewAllButton />
+      <ProductListWrapper products={products} />
     </section>
   );
 };
