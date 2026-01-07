@@ -7,6 +7,7 @@ import { CartProvider } from "@/contexts/cart-context";
 import { ReactQueryProvider } from "@/contexts/react-query-provider";
 import { Toaster } from "sonner";
 import { Analytics } from "@vercel/analytics/next";
+import FacebookPixel from "@/components/facebook-pixel";
 
 /*const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -51,6 +52,7 @@ export default function RootLayout({
             </div>
             <Header />
             {children}
+            <FacebookPixel />
             <Analytics />
             <Toaster />
 
