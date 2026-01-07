@@ -1,8 +1,12 @@
-import { getProducts } from "@/lib/services/products";
 import ProductListWrapper from "../product/product-list-wrapper";
+import { productsApi } from "@/lib/api/products.api";
 
-const BestSellersSection = () => {
-  const products = getProducts();
+const BestSellersSection = async () => {
+  const products = await productsApi.getProducts({
+    sortBy: "Date, new to old",
+    page: 1,
+    pageSize: 4,
+  });
 
   return (
     <section className="px-4 py-7 md:p-[50px]">

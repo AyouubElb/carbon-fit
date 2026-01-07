@@ -1,8 +1,6 @@
 "use client";
 
-import { useState } from "react";
 import {
-  Building2,
   CheckCircle,
   FileText,
   Loader2,
@@ -27,6 +25,7 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { toast } from "sonner";
+import { useCreateOrder } from "@/lib/hooks/useCreateOrder";
 
 interface OrderSummaryProps {
   product: Product;
@@ -39,12 +38,12 @@ const OrderSummary = ({
   selectedSize,
   quantity,
 }: OrderSummaryProps) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const { mutate: createOrder, isPending } = useCreateOrder();
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     reset,
   } = useForm<OrderFormData>({
     resolver: zodResolver(orderSchema),
@@ -53,9 +52,8 @@ const OrderSummary = ({
   const subtotal = product.price * quantity;
   const total = subtotal; // Free shipping
 
-  const onSubmit = async (data: OrderFormData) => {
+  const onSubmit = (data: OrderFormData) => {
     if (!selectedSize) return;
-    setIsLoading(true);
 
     // Map cart items to the shape we want to send to the server
     const item: OrderItem = {
@@ -74,20 +72,25 @@ const OrderSummary = ({
       total,
     };
 
-    try {
-      const response = await fetch("/api/order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        const { error } = await response.json();
-        console.error("Order error:", error);
-        setIsLoading(false);
-        toast.error(error.message as string, {
+    createOrder(payload, {
+      onSuccess: (orderData) => {
+        toast.success("Order placed successfully!", {
+          className: "bg-white",
+          description: "Order placed successfully!",
+          duration: 2000,
+          position: "top-right",
+          style: {
+            border: "1px solid #22c55e",
+            borderRadius: "0.5rem",
+          },
+          icon: "✅",
+        });
+        reset();
+      },
+      onError: (error) => {
+        toast.error(error.message, {
           className: "bg-white dark:bg-zinc-900",
-          description: "Order is failed. Please try again",
+          description: "Order failed. Please try again",
           duration: 3000,
           position: "top-right",
           style: {
@@ -96,30 +99,8 @@ const OrderSummary = ({
           },
           icon: "❌",
         });
-        return;
-      }
-
-      const orderData = await response.json();
-      console.log("Order response:", orderData);
-      toast.success("Order placed successfully!", {
-        className: "bg-white ",
-        description: "Order placed successfully!",
-        duration: 2000,
-        position: "top-right",
-        style: {
-          border: "1px solid #22c55e",
-          borderRadius: "0.5rem",
-        },
-        icon: "✅",
-      });
-
-      // reset input fields
-      reset();
-    } catch (fetchError) {
-      console.error("Network error:", fetchError);
-    } finally {
-      setIsLoading(false);
-    }
+      },
+    });
   };
 
   return (
@@ -324,9 +305,9 @@ const OrderSummary = ({
             <Button
               type="submit"
               className="w-full bg-black py-6 text-white text-base font-medium rounded-none hover:bg-gray-800"
-              disabled={isSubmitting}
+              disabled={isPending}
             >
-              {isLoading ? (
+              {isPending ? (
                 <span className="flex items-center justify-center gap-x-2">
                   <Loader2 className="size-4 animate-spin" />
                   COMMANDER - {total.toFixed(2)} dh

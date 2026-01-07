@@ -1,5 +1,5 @@
 "use client";
-import React, { use, useRef } from "react";
+import React, { use } from "react";
 import { Card, CardContent } from "../ui/card";
 import { Product } from "../../lib/types";
 import { useRouter } from "next/navigation";

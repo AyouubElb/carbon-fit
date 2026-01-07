@@ -25,7 +25,6 @@ const PromotionSection = () => {
         opacity: 0,
         duration: 0.6,
         ease: "power1.inOut",
-        stagger: 0.1,
         scrollTrigger: {
           trigger: promotionRef.current,
           start: "top center",

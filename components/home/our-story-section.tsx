@@ -1,13 +1,58 @@
+"use client";
 import promotionImage from "@/public/images/our-story-image.webp";
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const OurStorySection = () => {
+  const ourStoryRef = useRef<HTMLElement>(null);
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  useGSAP(
+    () => {
+      // scoped selector (queries only inside promotionRef)
+      const q = gsap.utils.selector(ourStoryRef);
+
+      // image animation (has its own ScrollTrigger)
+      gsap.from(q(".our-story-image"), {
+        y: 40,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power1.inOut",
+        scrollTrigger: {
+          trigger: ourStoryRef.current,
+          start: "top center",
+          toggleActions: "play none none none",
+          markers: false,
+        },
+      });
+
+      // text content animation (own ScrollTrigger)
+      gsap.from(q(".our-story-text-content"), {
+        y: 40,
+        opacity: 0,
+        duration: 0.6,
+        delay: 0.2,
+        ease: "power1.inOut",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: ourStoryRef.current,
+          start: "top center",
+          toggleActions: "play none none none",
+          markers: false,
+        },
+      });
+    },
+    { scope: ourStoryRef }
+  );
   return (
-    <section className="px-4 py-7 md:p-[50px]">
+    <section ref={ourStoryRef} className="px-4 py-7 md:p-[50px]">
       <div className="grid md:grid-cols-2 items-center">
         {/* Image - left side */}
-        <div className="relative w-full h-full">
+        <div className="our-story-image relative w-full h-full">
           <Image
             src={promotionImage}
             alt="Two founders standing between Porsche and BMW with Carbon Fit neon sign"
@@ -18,7 +63,7 @@ const OurStorySection = () => {
         </div>
         {/* Text content - right side */}
 
-        <div className="p-10 md:px-20 md:pb-20 md:pt-16">
+        <div className="our-story-text-content p-10 md:px-20 md:pb-20 md:pt-16">
           <h2 className="font-heading text-[42px] md:text-6xl text-[#E8E8E8] font-medium uppercase tracking-wide leading-12 md:leading-18 mb-5">
             NOTRE HISTOIRE
           </h2>

@@ -1,5 +1,9 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 const reviews = [
   {
@@ -40,14 +44,42 @@ const reviews = [
 ];
 
 const ReviewsSection = () => {
+  const reviewListRef = useRef<HTMLDivElement | null>(null);
+
+  gsap.registerPlugin(ScrollTrigger);
+  useGSAP(
+    () => {
+      // scoped selector (queries only inside promotionRef)
+      const q = gsap.utils.selector(reviewListRef);
+
+      gsap.from(q(".review-list-card"), {
+        y: 40,
+        opacity: 0,
+        duration: 0.6,
+        delay: 0.1,
+        ease: "power1.inOut",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: reviewListRef.current,
+          start: "top center",
+          toggleActions: "play none none none",
+          markers: false,
+        },
+      });
+    },
+    { scope: reviewListRef }
+  );
   return (
-    <section className="px-4 py-7 md:p-[50px]">
+    <section ref={reviewListRef} className="px-4 py-7 md:p-[50px]">
       <h2 className="font-heading text-[42px] md:text-[56px] text-[#E8E8E8] font-medium uppercase mb-5 md:mb-8">
         AVIS CLIENTS
       </h2>
       <div className="grid md:grid-cols-3 gap-10 mb-8">
         {reviews.map((review) => (
-          <div key={review.id} className="bg-[#2E2E30] space-y-4 px-8 py-6">
+          <div
+            key={review.id}
+            className="review-list-card bg-[#2E2E30] space-y-4 px-8 py-6"
+          >
             <div className="relative w-full aspect-[5/6] overflow-hidden">
               <Image
                 src={review.image}

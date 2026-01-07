@@ -1,6 +1,6 @@
 "use client";
 import { Brand } from "@/lib/types";
-import React, { use, useRef } from "react";
+import React, { useRef } from "react";
 import { Card, CardContent } from "../ui/card";
 import { ArrowRight } from "lucide-react";
 import { SUPABASE_IMAGE_URL } from "@/lib/supabaseClient";
@@ -10,9 +10,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-const BrandList = ({ brands }: { brands: Promise<Brand[]> }) => {
+const BrandList = ({ brands }: { brands: Brand[] }) => {
   const router = useRouter();
-  const brandList = use(brands);
 
   const brandListRef = useRef<HTMLDivElement | null>(null);
 
@@ -45,7 +44,7 @@ const BrandList = ({ brands }: { brands: Promise<Brand[]> }) => {
       ref={brandListRef}
       className="grid md:grid-cols-3 gap-5 md:gap-10 flex-wrap"
     >
-      {brandList.map((brand) => (
+      {brands.map((brand) => (
         <Card
           key={brand.id}
           className="brand-list-card relative group rounded-none gap-0 p-0 border-none bg-transparent"

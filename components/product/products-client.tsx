@@ -1,11 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import FilterControls from "../filters/filter-controls";
 import FilterPanel from "../filters/filter-panel";
 import ProductList from "./product-list";
 import Pagination from "./pagination";
-import { getProducts } from "@/lib/services/products";
-import { Product } from "@/lib/types";
+import { useProducts, useProductCount } from "@/lib/hooks/useProducts";
 import { useSearchParams } from "next/navigation";
 
 const PAGE_SIZE = 12;
@@ -13,104 +12,60 @@ const PAGE_SIZE = 12;
 const ProductsClient = () => {
   const searchParams = useSearchParams();
 
+  // Parse URL brand parameter
+  const urlBrand = searchParams.get("brand");
+  const brandFromUrl =
+    urlBrand && urlBrand.trim() !== "" && urlBrand.toLowerCase() !== "all"
+      ? urlBrand
+      : undefined;
+
   const [sortBy, setSortBy] = useState("Alphabetically, A-Z");
   const [currentPage, setCurrentPage] = useState(1);
-  const [numberOfPages, setNumberOfPages] = useState(1);
   const [showSortDropdown, setShowSortDropdown] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
-  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  const [selectedBrands, setSelectedBrands] = useState<string[]>(
+    brandFromUrl ? [brandFromUrl] : []
+  );
   const [selectedPriceRange, setSelectedPriceRange] = useState<string>("");
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    let mounted = true;
+  // Parse price range
+  const [priceMin, priceMax] = selectedPriceRange
+    ? (() => {
+        const [min, max] = selectedPriceRange.split("-");
+        return max === "+"
+          ? [Number.parseInt(min), undefined]
+          : [Number.parseInt(min), Number.parseInt(max)];
+      })()
+    : [undefined, undefined];
 
-    const raw = searchParams.get("brand");
-    const brand =
-      raw && raw.trim() !== "" && raw.toLowerCase() !== "all" ? raw : undefined;
-
-    getProducts(brand).then((data) => {
-      if (mounted) {
-        setProducts(data);
-        setLoading(false);
-      }
-    });
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
-  const filteredProducts = products.filter((product) => {
-    const brandMatch =
-      selectedBrands.length === 0 ||
-      selectedBrands.includes(product.brands.name);
-
-    let priceMatch = true;
-    if (selectedPriceRange) {
-      const [min, max] = selectedPriceRange.split("-");
-      if (max === "+") {
-        priceMatch = product.price >= Number.parseInt(min);
-      } else {
-        priceMatch =
-          product.price >= Number.parseInt(min) &&
-          product.price <= Number.parseInt(max);
-      }
-    }
-
-    return brandMatch && priceMatch;
+  // Fetch products with React Query
+  const {
+    data: products = [],
+    isLoading,
+    error,
+    refetch,
+  } = useProducts({
+    brands: selectedBrands,
+    sortBy,
+    priceMin,
+    priceMax,
+    page: currentPage,
+    pageSize: PAGE_SIZE,
   });
 
-  // Helper to safely convert product.created_at to a timestamp (number)
-  const toTimestamp = (d?: string | Date | null): number => {
-    if (!d) return 0;
-    const t = new Date(d).getTime();
-    return Number.isNaN(t) ? 0 : t;
-  };
-
-  const sortedAndFilteredProducts = [...filteredProducts].sort((a, b) => {
-    switch (sortBy) {
-      case "Alphabetically, A-Z":
-        return a.title.localeCompare(b.title);
-      case "Alphabetically, Z-A":
-        return b.title.localeCompare(a.title);
-      case "Price, low to high":
-        return a.price - b.price;
-      case "Price, high to low":
-        return b.price - a.price;
-      case "Date, old to new":
-        return toTimestamp(a.created_at) - toTimestamp(b.created_at);
-      case "Date, new to old":
-        return toTimestamp(b.created_at) - toTimestamp(a.created_at);
-
-      default:
-        return 0;
-    }
+  // Get total count for pagination
+  const { data: totalCount = 0 } = useProductCount({
+    brands: selectedBrands,
+    priceMin,
+    priceMax,
   });
 
-  // Update number of pages whenever the filtered+sorted list changes
-  useEffect(() => {
-    const pages = Math.max(
-      1,
-      Math.ceil(sortedAndFilteredProducts.length / PAGE_SIZE)
-    );
-    setNumberOfPages(pages);
+  const numberOfPages = Math.max(1, Math.ceil(totalCount / PAGE_SIZE));
 
-    // If current page is out of range after filtering, reset to 1
-    if (currentPage > pages) {
-      setCurrentPage(1);
-    }
-  }, [sortedAndFilteredProducts.length, currentPage]);
-
-  // Reset to first page when user changes filters or sorting (good UX)
+  // Reset to first page when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedBrands, selectedPriceRange, sortBy]);
-
-  // Slice the sorted & filtered products for the current page
-  const pageStart = (currentPage - 1) * PAGE_SIZE;
-  const pageEnd = pageStart + PAGE_SIZE;
-  const pageProducts = sortedAndFilteredProducts.slice(pageStart, pageEnd);
 
   const handleBrandChange = (brand: string) => {
     setSelectedBrands((prev) =>
@@ -123,7 +78,29 @@ const ProductsClient = () => {
     setSelectedPriceRange("");
   };
 
-  if (loading) return <p>Loading...</p>;
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="px-4 md:px-[50px] py-20 text-center">
+        <p className="text-lg">Loading products...</p>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="px-4 md:px-[50px] py-20 text-center">
+        <p className="text-red-500 text-lg mb-4">Failed to load products</p>
+        <button
+          onClick={() => refetch()}
+          className="px-4 py-2 bg-black text-white rounded hover:bg-gray-800"
+        >
+          Try Again
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="px-4 md:px-[50px]">
@@ -135,7 +112,7 @@ const ProductsClient = () => {
         setShowSortDropdown={setShowSortDropdown}
         showFilters={showFilters}
         setShowFilters={setShowFilters}
-        filteredProducts={filteredProducts}
+        filteredProducts={products}
       />
 
       {/* Filter Panel */}
@@ -153,7 +130,11 @@ const ProductsClient = () => {
 
       {/* Product Grid */}
       <div className="mb-16">
-        <ProductList products={pageProducts} variant="products" />
+        {products.length === 0 ? (
+          <p className="text-center py-10 text-gray-500">No products found</p>
+        ) : (
+          <ProductList products={products} variant="products" />
+        )}
       </div>
 
       {/* Pagination */}

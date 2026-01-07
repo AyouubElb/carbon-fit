@@ -1,10 +1,10 @@
 import { Product } from "@/lib/types";
-import { getProductById } from "@/lib/services/products";
 import ProductDetailsClient from "@/components/product/ProductDetailsClient";
+import { productsApi } from "@/lib/api/products.api";
 
 const ProductPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
-  const product: Product | null = await getProductById(id);
+  const product: Product | null = await productsApi.getProductById(id);
 
   if (!product) {
     return (

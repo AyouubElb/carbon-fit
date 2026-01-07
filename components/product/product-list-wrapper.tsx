@@ -28,9 +28,9 @@ const ProductListWrapper = ({ products, variant }: ProductListWrapperProps) => {
         y: 20,
         opacity: 0,
         duration: 0.6,
-        delay: 0.1,
+        //delay: 0.1,
         ease: "power1.inOut",
-        stagger: 0.1,
+        stagger: { each: 0.1, from: "start" },
         immediateRender: false,
         scrollTrigger: {
           trigger: productListWrapRef.current,
@@ -46,7 +46,6 @@ const ProductListWrapper = ({ products, variant }: ProductListWrapperProps) => {
         duration: 0.6,
         delay: 0.3,
         ease: "power1.inOut",
-        stagger: 0.1,
         immediateRender: false,
         scrollTrigger: {
           trigger: productListWrapRef.current,

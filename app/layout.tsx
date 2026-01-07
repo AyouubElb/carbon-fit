@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/header";
 import Newsletter from "@/components/layout/newslatter";
 import { CartProvider } from "@/contexts/cart-context";
+import { ReactQueryProvider } from "@/contexts/react-query-provider";
 import { Toaster } from "sonner";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -40,20 +41,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${figtree.variable} ${oswald.variable} antialiased`}>
-        <CartProvider>
-          {/* Top Banner */}
-          <div className="bg-[#1A1A1C] text-center py-2.5 px-7.5 border-b-gray-700 border-b-[1px]">
-            <p className="font-heading text-base md:text-xl text-[#E8E8E8] font-medium tracking-widest">
-              FREE SHIPPING ON OVER $50 ORDERS
-            </p>
-          </div>
-          <Header />
-          {children}
-          <Analytics />
-          <Toaster />
+        <ReactQueryProvider>
+          <CartProvider>
+            {/* Top Banner */}
+            <div className="bg-[#1A1A1C] text-center py-2.5 px-7.5 border-b-gray-700 border-b-[1px]">
+              <p className="font-heading text-base md:text-xl text-[#E8E8E8] font-medium tracking-widest">
+                LIVRAISON GRATUITE POUR LES COMMANDES DE PLUS DE 50 $
+              </p>
+            </div>
+            <Header />
+            {children}
+            <Analytics />
+            <Toaster />
 
-          <Newsletter />
-        </CartProvider>
+            <Newsletter />
+          </CartProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );

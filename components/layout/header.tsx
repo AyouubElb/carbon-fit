@@ -117,7 +117,7 @@ const Header = () => {
           </div>
 
           <div className="text-[#E8E8E8] font-heading text-2xl font-bold uppercase text-center">
-            CarbonFit
+            BlackStore
           </div>
           <div className="flex items-center justify-end space-x-4">
             <Search className="w-6 h-6 text-[#E8E8E8] hover:scale-110 cursor-pointer" />
