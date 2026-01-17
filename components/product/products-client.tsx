@@ -19,7 +19,7 @@ const ProductsClient = () => {
       ? urlBrand
       : undefined;
 
-  const [sortBy, setSortBy] = useState("Alphabetically, A-Z");
+  const [sortBy, setSortBy] = useState("Alphabétiquement, A-Z");
   const [currentPage, setCurrentPage] = useState(1);
   const [showSortDropdown, setShowSortDropdown] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
@@ -82,7 +82,7 @@ const ProductsClient = () => {
   if (isLoading) {
     return (
       <div className="px-4 md:px-[50px] py-20 text-center">
-        <p className="text-lg">Loading products...</p>
+        <p className="text-lg">Chargement des produits...</p>
       </div>
     );
   }
@@ -91,12 +91,12 @@ const ProductsClient = () => {
   if (error) {
     return (
       <div className="px-4 md:px-[50px] py-20 text-center">
-        <p className="text-red-500 text-lg mb-4">Failed to load products</p>
+        <p className="text-red-500 text-lg mb-4">Impossible de charger les produits</p>
         <button
           onClick={() => refetch()}
           className="px-4 py-2 bg-black text-white rounded hover:bg-gray-800"
         >
-          Try Again
+          Réessayer
         </button>
       </div>
     );
@@ -131,7 +131,7 @@ const ProductsClient = () => {
       {/* Product Grid */}
       <div className="mb-16">
         {products.length === 0 ? (
-          <p className="text-center py-10 text-gray-500">No products found</p>
+          <p className="text-center py-10 text-gray-500">Aucun produit trouvé</p>
         ) : (
           <ProductList products={products} variant="products" />
         )}

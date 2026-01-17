@@ -12,6 +12,7 @@ interface ProductRow {
   description: string;
   brands: { name: string } | { name: string }[];
   sizes: string[];
+  colors?: string[];
   created_at?: string;
 }
 
@@ -34,6 +35,8 @@ export const productsApi = {
       page = 1,
       pageSize = 12,
     } = params;
+
+    console.log("Fetching products is called with params:", params);
 
     // Build base query
     let query = supabase
@@ -87,7 +90,7 @@ export const productsApi = {
     if (error) throw error;
     if (!data) return [];
 
-    // Normalize the data 
+    // Normalize the data
     return data.map((row: ProductRow) => {
       const rawBrand = Array.isArray(row.brands) ? row.brands[0] : row.brands;
 
@@ -113,7 +116,7 @@ export const productsApi = {
     const { data, error } = await supabase
       .from("products")
       .select(
-        "id, title, price, originalPrice, onSale, images, description, brands(name), sizes, created_at"
+        "id, title, price, originalPrice, onSale, images, description, brands(name), sizes, colors, created_at"
       )
       .eq("id", id)
       .single();
@@ -149,6 +152,7 @@ export const productsApi = {
       description: String(row.description ?? ""),
       brands: brandObj,
       sizes: Array.isArray(row.sizes) ? row.sizes.map(String) : [],
+      colors: Array.isArray(row.colors) ? row.colors.map(String) : [],
       created_at: row.created_at ? String(row.created_at) : undefined,
     };
   },

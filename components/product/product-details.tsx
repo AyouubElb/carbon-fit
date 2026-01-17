@@ -1,11 +1,11 @@
 "use client";
 
 import { Product } from "@/lib/types";
-import { CheckCircle, Minus, Plus } from "lucide-react";
-import React, { useState } from "react";
-import { Button } from "../ui/button";
+import { Minus, Plus } from "lucide-react";
+import React, { useState, useEffect } from "react";
+//import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
-import { useCart } from "@/contexts/cart-context";
+//import { useCart } from "@/contexts/cart-context";
 import OrderSummary from "./order-summary";
 
 interface ProductDetailsProps {
@@ -14,12 +14,20 @@ interface ProductDetailsProps {
 }
 
 const ProductDetails = ({ product, rightSideRef }: ProductDetailsProps) => {
-  const { addItem } = useCart();
+  //const { addItem } = useCart();
   const [selectedSize, setSelectedSize] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const [isAdding, setIsAdding] = useState(false);
+  //const [isAdding, setIsAdding] = useState(false);
 
-  const handleAddToCart = async () => {
+  useEffect(() => {
+    if (product.colors && product.colors.length > 0) {
+      setSelectedColor(product.colors[0]);
+    }
+  }, [product.colors]);
+
+  {
+    /* const handleAddToCart = async () => {
     if (!selectedSize) return;
 
     setIsAdding(true);
@@ -43,7 +51,8 @@ const ProductDetails = ({ product, rightSideRef }: ProductDetailsProps) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }; */
+  }
   return (
     <div ref={rightSideRef} className="md:col-span-3 space-y-8">
       {/* Product Info */}
@@ -94,6 +103,36 @@ const ProductDetails = ({ product, rightSideRef }: ProductDetailsProps) => {
           </div>
         </div>
 
+        {/* Color Selection */}
+        {product.colors && product.colors.length > 0 && (
+          <div className="mb-8">
+            <h3 className="text-[#E8E8E8] text-base md:text-lg font-medium mb-2">
+              Couleur
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              {product.colors.map((color) => {
+                const displayColor =
+                  color.toLowerCase() === "gray" ? "#D3D3D3" : color;
+                return (
+                  <div
+                    key={color}
+                    onClick={() => setSelectedColor(color)}
+                    className={`p-1 rounded-full border-2 text-sm md:text-base font-medium transition-colors cursor-pointer ${
+                      selectedColor === color
+                        ? "border-[rgb(236,193,116)] scale-110"
+                        : "border-[#E8E8E8BF] hover:border-white hover:scale-102"
+                    }`}
+                  >
+                    <div
+                      className="w-10 h-10 rounded-full"
+                      style={{ backgroundColor: displayColor }}
+                    ></div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
         {/* Quantity */}
         <div className="mb-8">
           <h3 className="text-[#E8E8E8] text-base md:text-lg font-medium mb-2">
@@ -123,6 +162,7 @@ const ProductDetails = ({ product, rightSideRef }: ProductDetailsProps) => {
       <OrderSummary
         product={product}
         selectedSize={selectedSize}
+        selectedColor={selectedColor}
         quantity={quantity}
       />
 

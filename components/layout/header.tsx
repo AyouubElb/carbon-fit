@@ -1,11 +1,9 @@
 "use client";
 
-import { Menu, Search, ShoppingBag, ShoppingCart, X } from "lucide-react";
+import { Menu, Search, ShoppingCart, X } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import CartSidebar from "../cart/cart-sidebar";
 import { useCart } from "@/contexts/cart-context";
-import { Badge } from "../ui/badge";
 import { usePathname } from "next/navigation";
 
 const navigation = [
@@ -121,7 +119,7 @@ const Header = () => {
           </div>
           <div className="flex items-center justify-end space-x-4">
             <Search className="w-6 h-6 text-[#E8E8E8] hover:scale-110 cursor-pointer" />
-            <button
+            {/*  <button
               className="relative text-[#E8E8E8] hover:scale-110 cursor-pointer"
               onClick={() => setIsCartOpen(true)}
             >
@@ -131,12 +129,12 @@ const Header = () => {
                   {totalItems}
                 </Badge>
               )}
-            </button>
+            </button>*/}
           </div>
         </div>
 
         {/* Cart Sidebar */}
-        <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+        {/*<CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />*/}
       </header>
 
       {mobileMenuOpen && (

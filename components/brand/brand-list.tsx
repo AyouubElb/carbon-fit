@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import Link from "next/link";
 
 const BrandList = ({ brands }: { brands: Brand[] }) => {
   const router = useRouter();
@@ -49,26 +50,28 @@ const BrandList = ({ brands }: { brands: Brand[] }) => {
           key={brand.id}
           className="brand-list-card relative group rounded-none gap-0 p-0 border-none bg-transparent"
         >
-          <div className="relative w-full max-w-xl mb-2 aspect-[5/6] overflow-hidden">
-            <Image
-              src={SUPABASE_IMAGE_URL + brand.image}
-              alt={`${brand.name} with t-shirt`}
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-110"
-              onClick={() => router.push(`/collections?brand=${brand.name}`)}
-            />
-          </div>
-          <CardContent className="p-2 md:p-4">
-            <div className="flex items-center gap-1 hover:gap-2 cursor-pointer w-fit">
-              <h2
-                className="font-heading text-lg md:text-2xl text-[#E8E8E8] font-semibold uppercase"
-                onClick={() => router.push(`/collections?brand=${brand.name}`)}
-              >
-                {brand.name}
-              </h2>
-              <ArrowRight className="text-[#E8E8E8BF] w-6 h-6 md:w-7 md:h-7" />
+          <Link href={`/collections?brand=${brand.name}`} className="block">
+            <div className="relative w-full max-w-xl mb-2 aspect-[5/6] overflow-hidden">
+              <Image
+                src={SUPABASE_IMAGE_URL + brand.image}
+                alt={`${brand.name} with t-shirt`}
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-110"
+                //onClick={() => router.push(`/collections?brand=${brand.name}`)}
+              />
             </div>
-          </CardContent>
+            <CardContent className="p-2 md:p-4">
+              <div className="flex items-center gap-1 hover:gap-2 cursor-pointer w-fit">
+                <h2
+                  className="font-heading text-lg md:text-2xl text-[#E8E8E8] font-semibold uppercase"
+                  //onClick={() => router.push(`/collections?brand=${brand.name}`)}
+                >
+                  {brand.name}
+                </h2>
+                <ArrowRight className="text-[#E8E8E8BF] w-6 h-6 md:w-7 md:h-7" />
+              </div>
+            </CardContent>
+          </Link>
         </Card>
       ))}
     </div>

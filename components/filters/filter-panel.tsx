@@ -1,21 +1,21 @@
-import { ChevronDown, X } from "lucide-react";
+import { X } from "lucide-react";
 import React from "react";
 
-const brands = ["audi", "bmw", "mercedes", "porsche", "ferrari", "volkswagen"];
+const brands = ["audi", "bmw", "mercedes", "porsche"];
 const priceRanges = [
-  { label: "Under Dh 250", value: "0-250" },
+  { label: "Moins de Dh 250", value: "0-250" },
   { label: "Dh 250 - Dh 350", value: "250-350" },
   { label: "Dh 350 - Dh 450", value: "350-450" },
-  { label: "Over Dh 450", value: "450+" },
+  { label: "Plus de Dh 450", value: "450+" },
 ];
 
 const sortOptions = [
-  "Alphabetically, A-Z",
-  "Alphabetically, Z-A",
-  "Price, low to high",
-  "Price, high to low",
-  "Date, old to new",
-  "Date, new to old",
+  "Alphabétiquement, A-Z",
+  "Alphabétiquement, Z-A",
+  "Prix, du plus bas au plus élevé",
+  "Prix, du plus élevé au plus bas",
+  "Date, plus ancienne à la plus récente",
+  "Date, plus récente à la plus ancienne",
 ];
 
 interface FilterPanelProps {
@@ -47,7 +47,7 @@ const FilterPanel = ({
         <div className="bg-[#2a2a2c] border border-[#3a3a3c] p-6 mb-8 rounded-none">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-[#E8E8E8] font-figtree text-lg font-medium">
-              Filters
+              Filtres
             </h3>
             <button
               onClick={() => setShowFilters(false)}
@@ -61,7 +61,7 @@ const FilterPanel = ({
             {/* Brand Filter */}
             <div>
               <h4 className="text-[#E8E8E8] font-figtree text-sm font-medium mb-4">
-                Car Brand
+                Marque de voiture
               </h4>
               <div className="space-y-3">
                 {brands.map((brand) => (
@@ -86,7 +86,7 @@ const FilterPanel = ({
             {/* Price Filter */}
             <div>
               <h4 className="text-[#E8E8E8] font-figtree text-sm font-medium mb-4">
-                Price Range
+                Gamme de prix
               </h4>
               <div className="space-y-3">
                 {priceRanges.map((range) => (
@@ -113,7 +113,7 @@ const FilterPanel = ({
             {/* Sort By section for mobile */}
             <div className="md:hidden">
               <h4 className="text-[#E8E8E8] font-figtree text-sm font-medium mb-4">
-                Sort By
+                Trier par
               </h4>
               <div className="space-y-3">
                 {sortOptions.map((option) => (
@@ -144,7 +144,7 @@ const FilterPanel = ({
               onClick={clearFilters}
               className="text-[rgb(236,193,116)] font-figtree text-sm hover:text-[#E8E8E8] transition-colors"
             >
-              Clear all filters
+              Effacer tous les filtres
             </button>
           </div>
         </div>

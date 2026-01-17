@@ -5,6 +5,7 @@ import { Product } from "../../lib/types";
 import { useRouter } from "next/navigation";
 import { SUPABASE_IMAGE_URL } from "@/lib/supabaseClient";
 import Image from "next/image";
+import Link from "next/link";
 
 interface ProductListProps {
   products: Product[] | Promise<Product[]>;
@@ -25,31 +26,34 @@ const ProductList = ({ products, variant }: ProductListProps) => {
         <Card
           key={product.id}
           className="product-list-card group cursor-pointer"
-          onClick={() => router.push(`/products/${product.id}`)}
+          //onClick={() => router.push(`/products/${product.id}`)}
         >
-          <div
-            className={`relative w-full overflow-hidden
+          <Link href={`/products/${product.id}`} className="block">
+            <div
+              className={`relative w-full overflow-hidden
             ${variant === "products" ? "aspect-[8/9]" : "aspect-square"}
           `}
-          >
-            <Image
-              src={SUPABASE_IMAGE_URL + product.images[0]}
-              alt={product.title}
-              fill
-              className="cover transition-transform duration-300 group-hover:scale-110"
-            />
-          </div>
-          <CardContent className="p-3.5 md:py-6.5 md:px-6">
-            <h3 className="font-heading text-lg text-[#E8E8E8] font-medium mb-2 uppercase tracking-wide hover:underline">
-              {product.title}
-            </h3>
-            <p className="text-sm text-[#E8E8E8BF] line-through">
-              {product.originalPrice} MAD
-            </p>
-            <p className="text-lg text-[#E8E8E8] text-semibold">
-              {product.price} MAD
-            </p>
-          </CardContent>
+            >
+              {" "}
+              <Image
+                src={SUPABASE_IMAGE_URL + product.images[0]}
+                alt={product.title}
+                fill
+                className="cover transition-transform duration-300 group-hover:scale-110"
+              />
+            </div>
+            <CardContent className="p-3.5 md:py-6.5 md:px-6">
+              <h3 className="font-heading text-lg text-[#E8E8E8] font-medium mb-2 uppercase tracking-wide hover:underline">
+                {product.title}
+              </h3>
+              <p className="text-sm text-[#E8E8E8BF] line-through">
+                {product.originalPrice} MAD
+              </p>
+              <p className="text-lg text-[#E8E8E8] text-semibold">
+                {product.price} MAD
+              </p>
+            </CardContent>
+          </Link>
         </Card>
       ))}
     </div>

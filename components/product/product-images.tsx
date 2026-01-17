@@ -33,13 +33,14 @@ const ProductImages = ({
           src={SUPABASE_IMAGE_URL + images[selectedImage] || "/placeholder.svg"}
           alt={title}
           fill
+          priority
           className="object-cover rounded-none"
         />
       </div>
 
       {/* Thumbnail Images */}
-      <div className="grid grid-cols-3 gap-4">
-        {thumbnails.slice(0, 3).map((image, index) => (
+      <div className="grid grid-cols-5 gap-4">
+        {thumbnails.slice(0, 5).map((image, index) => (
           <button
             key={index}
             onClick={() => setSelectedImage(index)}

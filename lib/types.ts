@@ -10,6 +10,7 @@ export interface Product {
   images: string[];
   description: string;
   sizes: string[];
+  colors?: string[];
   created_at?: string | Date;
 }
 

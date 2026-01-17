@@ -30,12 +30,14 @@ import { useCreateOrder } from "@/lib/hooks/useCreateOrder";
 interface OrderSummaryProps {
   product: Product;
   selectedSize: string;
+  selectedColor: string;
   quantity: number;
 }
 
 const OrderSummary = ({
   product,
   selectedSize,
+  selectedColor,
   quantity,
 }: OrderSummaryProps) => {
   const { mutate: createOrder, isPending } = useCreateOrder();
@@ -62,7 +64,7 @@ const OrderSummary = ({
       product_price: product.price,
       product_image: product.images[0],
       size: selectedSize,
-      color: null,
+      color: selectedColor || null,
       quantity,
     };
 
@@ -74,9 +76,9 @@ const OrderSummary = ({
 
     createOrder(payload, {
       onSuccess: (orderData) => {
-        toast.success("Order placed successfully!", {
+        toast.success("Commande passée avec succès!", {
           className: "bg-white",
-          description: "Order placed successfully!",
+          description: "Commande passée avec succès!",
           duration: 2000,
           position: "top-right",
           style: {
@@ -90,7 +92,7 @@ const OrderSummary = ({
       onError: (error) => {
         toast.error(error.message, {
           className: "bg-white dark:bg-zinc-900",
-          description: "Order failed. Please try again",
+          description: "La commande a échoué. Veuillez réessayer",
           duration: 3000,
           position: "top-right",
           style: {
@@ -120,6 +122,17 @@ const OrderSummary = ({
             <span className="text-gray-700 text-sm font-medium">Taille:</span>
             <span className="text-base font-bold">{selectedSize}</span>
           </div>
+          {selectedColor && (
+            <div className="flex items-center gap-2 mt-1">
+              <span className="text-gray-700 text-sm font-medium">
+                Couleur:
+              </span>
+              <div
+                className="w-4 h-4 rounded-full"
+                style={{ backgroundColor: selectedColor }}
+              ></div>
+            </div>
+          )}
         </div>
         <span className="font-bold text-black">
           {product.price.toFixed(2)} dh
